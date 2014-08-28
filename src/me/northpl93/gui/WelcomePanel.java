@@ -75,16 +75,16 @@ public class WelcomePanel extends JPanel {
 			}
 		});
 		
-		btnWbijam.setBounds(198, 244, 85, 23);
+		btnWbijam.setBounds(289, 267, 85, 23);
 		add(btnWbijam);
 		
 		textField = new JTextField();
-		textField.setBounds(93, 87, 86, 20);
+		textField.setBounds(93, 87, 124, 20);
 		add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(93, 118, 86, 20);
+		textField_1.setBounds(93, 118, 124, 20);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -97,30 +97,30 @@ public class WelcomePanel extends JPanel {
 		add(lblHaso);
 		
 		JLabel lblZalogujSiDo = new JLabel("Zaloguj si\u0119 do Bukkit.PL");
-		lblZalogujSiDo.setBounds(37, 62, 142, 14);
+		lblZalogujSiDo.setBounds(75, 62, 142, 14);
 		add(lblZalogujSiDo);
 		
 		JLabel lblUycieNiepoprawnychDanych = new JLabel("U\u017Cycie niepoprawnych danych spowoduje, \u017Ce nie b\u0119dziesz m\u00F3g\u0142 pisa\u0107!");
 		lblUycieNiepoprawnychDanych.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUycieNiepoprawnychDanych.setVerticalAlignment(SwingConstants.TOP);
-		lblUycieNiepoprawnychDanych.setBounds(37, 210, 440, 23);
+		lblUycieNiepoprawnychDanych.setBounds(103, 233, 440, 23);
 		add(lblUycieNiepoprawnychDanych);
 		
 		JLabel lblSkonfigurujOpcje = new JLabel("Skonfiguruj opcje");
-		lblSkonfigurujOpcje.setBounds(322, 62, 110, 14);
+		lblSkonfigurujOpcje.setBounds(457, 62, 110, 14);
 		add(lblSkonfigurujOpcje);
 		
 		chckbxConsoleDebug = new JCheckBox("Debuguj na konsole");
-		chckbxConsoleDebug.setBounds(281, 86, 196, 23);
+		chckbxConsoleDebug.setBounds(414, 86, 230, 23);
 		add(chckbxConsoleDebug);
 		
 		chckbxChatDebug = new JCheckBox("Debuguj na czat");
-		chckbxChatDebug.setBounds(281, 112, 196, 23);
+		chckbxChatDebug.setBounds(414, 112, 230, 23);
 		add(chckbxChatDebug);
 		
 		chckbxRollOnNewPost = new JCheckBox("Przewijaj gdy pojawi si\u0119 nowy post");
 		chckbxRollOnNewPost.setSelected(true);
-		chckbxRollOnNewPost.setBounds(281, 138, 196, 23);
+		chckbxRollOnNewPost.setBounds(414, 138, 230, 23);
 		add(chckbxRollOnNewPost);
 
 	}
