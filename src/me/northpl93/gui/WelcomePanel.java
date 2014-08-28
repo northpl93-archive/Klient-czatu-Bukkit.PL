@@ -105,7 +105,7 @@ public class WelcomePanel extends JPanel {
 		add(lblUycieNiepoprawnychDanych);
 		
 		JLabel lblSkonfigurujOpcje = new JLabel("Skonfiguruj opcje");
-		lblSkonfigurujOpcje.setBounds(322, 62, 93, 14);
+		lblSkonfigurujOpcje.setBounds(322, 62, 110, 14);
 		add(lblSkonfigurujOpcje);
 		
 		chckbxConsoleDebug = new JCheckBox("Debuguj na konsole");
