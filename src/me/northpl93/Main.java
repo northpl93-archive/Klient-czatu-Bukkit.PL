@@ -12,7 +12,7 @@ import me.northpl93.gui.PanelsEnum;
 
 public class Main
 {
-	public static Thread chatListener = null;
+	public static Thread chatListener   = null;
 	public static JFrame window         = null;
 	
 	public static void main(String[] args)
@@ -29,15 +29,5 @@ public class Main
         });
         
         chatListener = new ChatListenThread();
-	}
-	
-	@SuppressWarnings("deprecation")
-	public static void stopListening()
-	{
-		if(chatListener != null)
-		{
-			chatListener.stop();
-		}
-		chatListener = null;
 	}
 }
