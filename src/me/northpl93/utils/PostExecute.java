@@ -46,14 +46,6 @@ public class PostExecute {
 	        response.append('\r');
 	      }
 	      rd.close();
-	      
-	      String headerName=null;
-	      for (int i=1; (headerName = connection.getHeaderFieldKey(i))!=null; i++) {
-	       	if (headerName.equals("Set-Cookie")) {                  
-	      	String cookie = connection.getHeaderField(i);
-	      	System.out.println(cookie);
-	       	}
-	      }
 	      	
 	      return response.toString();
 

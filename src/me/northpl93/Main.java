@@ -20,14 +20,14 @@ public class Main
 		System.out.println("start");
 		CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ) );
 		
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                window = new ChatWindow();
-                window.setContentPane(PanelsEnum.WELCOME_PANEL.getInstance());
-            }
-        });
-        
-        chatListener = new ChatListenThread();
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				window = new ChatWindow();
+				window.setContentPane(PanelsEnum.WELCOME_PANEL.getInstance());
+			}
+		});
+
+		chatListener = new ChatListenThread();
 	}
 }
