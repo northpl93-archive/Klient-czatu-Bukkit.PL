@@ -1,20 +1,19 @@
 package me.northpl93.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
 import me.northpl93.utils.XenForoUtils;
-import me.northpl93.ChatListenThread;
-
-import java.awt.EventQueue;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class WelcomePanel extends JPanel {
 	private JTextField textField;

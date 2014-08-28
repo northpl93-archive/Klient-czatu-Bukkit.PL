@@ -14,15 +14,9 @@ import com.google.gson.Gson;
 
 public class ChatListenThread extends Thread
 {
-	private boolean shuldExecuting = true;
 	private String account;
 	private int latestMessage = 0;
 	private Gson gson = null;
-	
-	public ChatListenThread(String _account)
-	{
-		account = _account;
-	}
 	
 	public ChatListenThread(){}
 	
@@ -31,7 +25,7 @@ public class ChatListenThread extends Thread
 	{
 		gson = new Gson();
 		
-		while(shuldExecuting)
+		while(true)
 		{
 			String rawData =
 					"_xfToken="+account+"&"
