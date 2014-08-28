@@ -2,6 +2,8 @@ package me.northpl93.utils;
 
 import javax.swing.JOptionPane;
 
+import me.northpl93.Main;
+
 public class XenForoUtils
 {
 	public static String loginUser(String username, String password)
@@ -13,8 +15,16 @@ public class XenForoUtils
 				+ "register=0&"
 				+ "remember=0";
 		String lol = PostExecute.excutePost("http://bukkit.pl/login/login", rawData);
-		int position = lol.indexOf("_xfToken");
-		return lol.substring(position+17, position+73);
+		int positionOfToken = lol.indexOf("_xfToken");
+		
+		int startPosition = positionOfToken+17;
+		int endPosition   = lol.indexOf("\"", startPosition);
+		
+		Main.debug("XenForoUtils -> loginUser -> positionOfToken: "+positionOfToken);
+		Main.debug("XenForoUtils -> loginUser -> startPosition: "+startPosition);
+		Main.debug("XenForoUtils -> loginUser -> endPosition: "+endPosition);
+		
+		return lol.substring(startPosition, endPosition);
 	}
 	
 	public static void sendMessage(String xfToken, String message)
@@ -28,5 +38,6 @@ public class XenForoUtils
 		{
 			JOptionPane.showMessageDialog(null, "Wyst¹pi³ problem podczas wysy³ania wiadomoœci. Prawdopodobnie siê nie zalogowa³eœ (lub poda³eœ z³e dane)");
 		}
+		Main.debug("XenForoUtils -> sendMessage -> response: "+response);
 	}
 }

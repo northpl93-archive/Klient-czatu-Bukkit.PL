@@ -7,13 +7,19 @@ import java.net.CookiePolicy;
 
 import javax.swing.JFrame;
 
+import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.ChatWindow;
 import me.northpl93.gui.PanelsEnum;
 
 public class Main
 {
-	public static Thread chatListener   = null;
-	public static JFrame window         = null;
+	public static Thread chatListener     = null;
+	public static JFrame window           = null;
+	
+	public static boolean debugOnConsole  = false;
+	public static boolean debugOnChat     = false;
+	public static boolean rollOnNewPost   = true;
+	
 	
 	public static void main(String[] args)
 	{
@@ -29,5 +35,23 @@ public class Main
 		});
 
 		chatListener = new ChatListenThread();
+	}
+	
+	public static void debug(String message)
+	{
+		if(debugOnConsole)
+		{
+			System.out.println(message);
+		}
+		
+		if(debugOnChat)
+		{
+			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[DEBUG] "+message);
+			if(Main.rollOnNewPost)
+			{
+				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
+			}
+			Main.window.revalidate();
+		}
 	}
 }

@@ -53,7 +53,10 @@ public class ChatListenThread extends Thread
 					sb.append("\n");
 				}
 				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append(sb.toString());
-				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();;
+				if(Main.rollOnNewPost)
+				{
+					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
+				}
 				Main.window.revalidate();
 			}
 			
