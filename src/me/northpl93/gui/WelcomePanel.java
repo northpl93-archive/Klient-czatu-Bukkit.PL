@@ -54,6 +54,7 @@ public class WelcomePanel extends JPanel {
 					
 					((ChatListenThread) Main.chatListener).setLoggedUser("");
 					Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
+					Main.usersListener.start();
 					return;
 				}
 				
@@ -69,6 +70,7 @@ public class WelcomePanel extends JPanel {
 				
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
+				Main.usersListener.start();
 				return;
 			}
 		});

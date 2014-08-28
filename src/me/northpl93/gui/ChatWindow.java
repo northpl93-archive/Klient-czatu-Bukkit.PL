@@ -12,7 +12,7 @@ public class ChatWindow extends JFrame
 		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(500, 300);
+        setSize(650, 350);
         setResizable(false);
 	}
 }

@@ -41,17 +41,26 @@ public class ChatListenThread extends Thread
 			for(Element element : as)
 			{
 				StringBuilder sb = new StringBuilder();
+
 				for(Element el : element.getElementsByClass("username"))
 				{
-					sb.append(el.ownText());
+					sb.append(el.text());
 					sb.append(": ");
 				}
-
+				
 				for(Element el : element.getElementsByClass("taigachat_messagetext"))
-				{
-					sb.append(el.ownText());
+				{   
+					sb.append(el.text());
+					
+					for(Element ell : el.getElementsByTag("img"))
+					{
+						sb.append(" ");
+						sb.append(ell.attr("alt"));
+					}
+					
 					sb.append("\n");
 				}
+				
 				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append(sb.toString());
 				if(Main.rollOnNewPost)
 				{

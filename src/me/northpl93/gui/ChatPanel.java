@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,11 +19,17 @@ import me.northpl93.Main;
 import me.northpl93.utils.SwingKeyListener;
 import me.northpl93.utils.XenForoUtils;
 
+import java.awt.List;
+
 public class ChatPanel extends JPanel  {
+	
+	private static final long serialVersionUID = -4902262492595144810L;
 	private SwingKeyListener skl = new SwingKeyListener();
+	private boolean isListVisible = true;
 	
 	public JTextField wiadomoscDoWyslania;
-	public JTextArea textArea;
+	public final JTextArea textArea;
+	public final List list;
 	private JScrollPane jScrollPane;
 	private JScrollBar vertical;
 	/**
@@ -32,12 +39,12 @@ public class ChatPanel extends JPanel  {
 		setLayout(null);
 		
 		wiadomoscDoWyslania = new JTextField();
-		wiadomoscDoWyslania.setBounds(0, 251, 427, 20);
+		wiadomoscDoWyslania.setBounds(0, 302, 511, 20);
 		add(wiadomoscDoWyslania);
 		wiadomoscDoWyslania.setColumns(10);
 		wiadomoscDoWyslania.addKeyListener(skl);
 		
-		JButton przyciskOdWysylania = new JButton("Wy\u015Blij!");
+		JButton przyciskOdWysylania = new JButton("Wy\u015Blij");
 		przyciskOdWysylania.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(wiadomoscDoWyslania.getText() == null || wiadomoscDoWyslania.getText().equalsIgnoreCase(""))
@@ -49,19 +56,51 @@ public class ChatPanel extends JPanel  {
 				wiadomoscDoWyslania.setText("");
 			}
 		});
-		przyciskOdWysylania.setBounds(426, 250, 74, 23);
+		przyciskOdWysylania.setBounds(510, 301, 95, 23);
 		przyciskOdWysylania.addKeyListener(skl);
 		add(przyciskOdWysylania);
 		
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setBounds(0, 0, 500, 251);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setBounds(0, 0, 511, 301);
 		//add(textArea);
 		
         jScrollPane = new JScrollPane(textArea);
-        jScrollPane.setBounds(0, 0, 500, 251);
+        jScrollPane.setBounds(0, 0, 511, 301);
         jScrollPane.addKeyListener(skl);
         add(jScrollPane);
+        
+        list = new List();
+        list.setBounds(510, 0, 150, 301);
+        add(list);
+        
+        JButton btnHideUsersList = new JButton("X");
+        btnHideUsersList.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		if(isListVisible)
+        		{
+        			remove(list);
+        			textArea.setBounds(0, 0, 649, 301);
+        			jScrollPane.setBounds(0, 0, 649, 301);
+        			scrollToDown();
+        			repaint();
+        			isListVisible = false;
+        		}
+        		else
+        		{
+        			add(list);
+        			textArea.setBounds(0, 0, 511, 301);
+        			jScrollPane.setBounds(0, 0, 511, 301);
+        			scrollToDown();
+        			repaint();
+        			isListVisible = true;
+        		}
+        	}
+        });
+        btnHideUsersList.setBounds(604, 301, 46, 23);
+        add(btnHideUsersList);
         
         vertical = jScrollPane.getVerticalScrollBar();
 	}

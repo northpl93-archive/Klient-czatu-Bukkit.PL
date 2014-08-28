@@ -14,6 +14,7 @@ import me.northpl93.gui.PanelsEnum;
 public class Main
 {
 	public static Thread chatListener     = null;
+	public static Thread usersListener    = null;
 	public static JFrame window           = null;
 	
 	public static boolean debugOnConsole  = false;
@@ -35,6 +36,7 @@ public class Main
 		});
 
 		chatListener = new ChatListenThread();
+		usersListener = new UsersListenThread();
 	}
 	
 	public static void debug(String message)
