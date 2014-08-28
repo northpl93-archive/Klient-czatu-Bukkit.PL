@@ -23,16 +23,16 @@ public class PostExecute {
 				
 	      connection.setRequestProperty("Content-Length", "" + 
 	               Integer.toString(urlParameters.getBytes().length));
-	      connection.setRequestProperty("Content-Language", "en-US");  
+	      connection.setRequestProperty("Content-Language", "pl-PL");
+	      connection.setRequestProperty("charset", "UTF-8");
 				
 	      connection.setUseCaches (false);
 	      connection.setDoInput(true);
 	      connection.setDoOutput(true);
 
 	      //Send request
-	      DataOutputStream wr = new DataOutputStream (
-	                  connection.getOutputStream ());
-	      wr.writeBytes (urlParameters);
+	      DataOutputStream wr = new DataOutputStream (connection.getOutputStream ());
+	      wr.write (urlParameters.getBytes("UTF-8"));
 	      wr.flush ();
 	      wr.close ();
 
