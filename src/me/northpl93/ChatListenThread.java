@@ -57,7 +57,7 @@ public class ChatListenThread extends Thread
 				}
 				
 				for(Element el : element.getElementsByClass("taigachat_messagetext"))
-				{   
+				{
 					sb.append(el.text());
 					
 					for(Element ell : el.getElementsByTag("img"))

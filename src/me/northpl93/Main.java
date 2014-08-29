@@ -7,6 +7,8 @@ import java.net.CookiePolicy;
 
 import javax.swing.JFrame;
 
+import me.northpl93.cmd.CommandManager;
+import me.northpl93.cmd.commands.*;
 import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.ChatWindow;
 import me.northpl93.gui.PanelsEnum;
@@ -17,6 +19,7 @@ public class Main
 	public static Thread usersListener    = null;
 	public static Thread wathDogThread    = null;
 	public static JFrame window           = null;
+	public static CommandManager cmdMngr  = null;
 	
 	public static boolean debugOnConsole  = false;
 	public static boolean debugOnChat     = false;
@@ -38,6 +41,8 @@ public class Main
 
 		chatListener = new ChatListenThread();
 		usersListener = new UsersListenThread();
+		cmdMngr = new CommandManager();
+		registerCommands();
 	}
 	
 	public static void debug(String message)
@@ -56,5 +61,10 @@ public class Main
 			}
 			Main.window.revalidate();
 		}
+	}
+	
+	private static void registerCommands()
+	{
+		cmdMngr.registerCommand(new Help());
 	}
 }

@@ -48,6 +48,13 @@ public class ChatPanel extends JPanel  {
 					JOptionPane.showMessageDialog(null, "Musisz wpisaæ wiadomoœæ!");
 					return;
 				}
+				
+				if(wiadomoscDoWyslania.getText().startsWith("/"))
+				{
+					Main.cmdMngr.handleCommand(wiadomoscDoWyslania.getText().substring(1));
+					wiadomoscDoWyslania.setText("");
+					return;
+				}
 				XenForoUtils.sendMessage(((ChatListenThread)Main.chatListener).getLoggedUser(), wiadomoscDoWyslania.getText());
 				wiadomoscDoWyslania.setText("");
 			}

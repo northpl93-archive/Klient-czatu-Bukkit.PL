@@ -25,6 +25,14 @@ public class SwingKeyListener implements KeyListener
 				JOptionPane.showMessageDialog(null, "Musisz wpisaæ wiadomoœæ!");
 				return;
 			}
+			
+			if(cp.wiadomoscDoWyslania.getText().startsWith("/"))
+			{
+				Main.cmdMngr.handleCommand(cp.wiadomoscDoWyslania.getText().substring(1));
+				cp.wiadomoscDoWyslania.setText("");
+				return;
+			}
+			
 			XenForoUtils.sendMessage(((ChatListenThread)Main.chatListener).getLoggedUser(), cp.wiadomoscDoWyslania.getText());
 			cp.wiadomoscDoWyslania.setText("");
 		}
