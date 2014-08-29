@@ -1,5 +1,8 @@
 package me.northpl93;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.PanelsEnum;
 import me.northpl93.utils.JsonUsersResponseParser;
@@ -14,8 +17,11 @@ import com.google.gson.Gson;
 
 public class UsersListenThread extends Thread
 {
-	public String cacheXfToken = "";
-	@SuppressWarnings("deprecation")
+	public String cacheXfToken       = "";
+	private ArrayList<String> latestUsers = null;
+	private ArrayList<String> newUsers    = null;
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public void run()
 	{
@@ -67,6 +73,40 @@ public class UsersListenThread extends Thread
 			{
 				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s);
 			}
+			
+			newUsers = new ArrayList<String>(Arrays.asList(users));
+			
+			if(latestUsers != null)
+			{	
+				for(String s : latestUsers)
+				{
+					if(!newUsers.contains(s))
+					{
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] - U¿ytkownik "+s+" opuœci³ czat\n");
+						if(Main.rollOnNewPost)
+						{
+							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
+						}
+						Main.window.revalidate();
+					}
+				}
+				
+				for(String s : newUsers)
+				{
+					if(!latestUsers.contains(s))
+					{
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] + U¿ytkownik "+s+" do³¹czy³ do czatu\n");
+						if(Main.rollOnNewPost)
+						{
+							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
+						}
+						Main.window.revalidate();
+					}
+				}
+			}
+			
+			latestUsers = (ArrayList<String>) newUsers.clone();
+			newUsers = null;
 			
 			try
 			{
