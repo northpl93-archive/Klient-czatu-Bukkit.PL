@@ -13,7 +13,10 @@ import javax.swing.SwingUtilities;
 
 import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
+import me.northpl93.UsersListenThread;
+import me.northpl93.WathDogThread;
 import me.northpl93.utils.XenForoUtils;
+
 import javax.swing.JCheckBox;
 
 public class WelcomePanel extends JPanel {
@@ -52,9 +55,19 @@ public class WelcomePanel extends JPanel {
 			            }
 			        });
 					
+					if(Main.chatListener == null)
+					{
+						Main.chatListener = new ChatListenThread();
+					}
 					((ChatListenThread) Main.chatListener).setLoggedUser("");
 					Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
+					if(Main.usersListener == null)
+					{
+						Main.usersListener = new UsersListenThread();
+					}
 					Main.usersListener.start();
+					Main.wathDogThread = new WathDogThread();
+					Main.wathDogThread.start();
 					return;
 				}
 				
@@ -71,6 +84,8 @@ public class WelcomePanel extends JPanel {
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
 				Main.usersListener.start();
+				Main.wathDogThread = new WathDogThread();
+				Main.wathDogThread.start();
 				return;
 			}
 		});

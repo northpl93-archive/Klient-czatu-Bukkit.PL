@@ -14,7 +14,8 @@ import com.google.gson.Gson;
 
 public class UsersListenThread extends Thread
 {
-	
+	public String cacheXfToken = "";
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run()
 	{
@@ -22,7 +23,24 @@ public class UsersListenThread extends Thread
 		
 		while(true)
 		{
-			String content = PostExecute.excutePost("http://bukkit.pl/shoutbox", "_xfToken="+((ChatListenThread)Main.chatListener).getLoggedUser()+"&_xfResponseType=json");
+			String xfToken = "";
+			if(Main.chatListener != null)
+			{
+				xfToken = ((ChatListenThread)Main.chatListener).getLoggedUser();
+			}
+			else
+			{
+				xfToken = cacheXfToken;
+			}
+			
+			String content = PostExecute.excutePost("http://bukkit.pl/shoutbox", "_xfToken="+xfToken+"&_xfResponseType=json");
+			
+			if(content == null)
+			{
+				Main.debug("Nie mo¿na pobraæ listy u¿ytkowników: Wyst¹pi³ problem z po³¹czeniem. W¹tek zostanie zatrzymany...\n");
+				this.stop();
+				return;
+			}
 			JsonUsersResponseParser decoded_json = gson.fromJson(content, JsonUsersResponseParser.class);
 			
 			Document document = Jsoup.parse(decoded_json.getSidebarHtml());

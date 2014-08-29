@@ -40,4 +40,13 @@ public class XenForoUtils
 		}
 		Main.debug("XenForoUtils -> sendMessage -> response: "+response);
 	}
+	
+	public static void logout(String xfToken)
+	{
+		String rawData =
+				"_xfToken="+xfToken+"&"
+				+ "_xfResponseType=json";
+		String response = PostExecute.excutePost("http://bukkit.pl/logout/", rawData);
+		Main.debug("XenForoUtils -> logout -> response: "+response);
+	}
 }

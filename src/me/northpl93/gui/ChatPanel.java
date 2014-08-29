@@ -1,11 +1,9 @@
 package me.northpl93.gui;
 
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,8 +16,6 @@ import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
 import me.northpl93.utils.SwingKeyListener;
 import me.northpl93.utils.XenForoUtils;
-
-import java.awt.List;
 
 public class ChatPanel extends JPanel  {
 	
@@ -84,8 +80,8 @@ public class ChatPanel extends JPanel  {
         			remove(list);
         			textArea.setBounds(0, 0, 649, 301);
         			jScrollPane.setBounds(0, 0, 649, 301);
-        			scrollToDown();
-        			repaint();
+                	repaint();
+                	scrollToDown();
         			isListVisible = false;
         		}
         		else
@@ -93,8 +89,8 @@ public class ChatPanel extends JPanel  {
         			add(list);
         			textArea.setBounds(0, 0, 511, 301);
         			jScrollPane.setBounds(0, 0, 511, 301);
-        			scrollToDown();
-        			repaint();
+                	repaint();
+                	scrollToDown();
         			isListVisible = true;
         		}
         	}

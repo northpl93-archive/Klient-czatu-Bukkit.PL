@@ -15,6 +15,7 @@ public class Main
 {
 	public static Thread chatListener     = null;
 	public static Thread usersListener    = null;
+	public static Thread wathDogThread    = null;
 	public static JFrame window           = null;
 	
 	public static boolean debugOnConsole  = false;

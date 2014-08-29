@@ -20,6 +20,7 @@ public class ChatListenThread extends Thread
 	
 	public ChatListenThread(){}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run()
 	{
@@ -32,6 +33,13 @@ public class ChatListenThread extends Thread
 					+ "lastrefresh="+latestMessage;
 			
 			String lol = PostExecute.excutePost("http://bukkit.pl/index.php/taigachat/list.json", rawData);
+			
+			if(lol == null) //B³¹d z pobieraniem zawartoœci
+			{
+				Main.debug("Nie mo¿na pobraæ nowych wiadomoœci: Wyst¹pi³ problem z po³¹czeniem. W¹tek zostanie zatrzymany...\n");
+				this.stop();
+				return;
+			}
 
 			JsonResponseParser obj2 = gson.fromJson(lol, JsonResponseParser.class);
 			
@@ -96,5 +104,15 @@ public class ChatListenThread extends Thread
 	public void setLoggedUser(String xfToken)
 	{
 		account = xfToken;
+	}
+	
+	public int getLatestMessage()
+	{
+		return latestMessage;
+	}
+	
+	public void setLatestMessage(int newLatestMessage)
+	{
+		latestMessage = newLatestMessage;
 	}
 }
