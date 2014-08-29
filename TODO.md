@@ -6,7 +6,9 @@ Znane problemy:
 - [ ] GUI wygl¹da obleœnie
  
 Do zrobienia:
-- [x] Poprawiæ odpalanie w¹tku do nas³uchiwania wiadomoœci
 - [ ] Poprawiæ parsowanie htmla (wywaliæ te pêtle ;_;)
 - [ ] Zrobiæ ¿eby okienko mog³o byæ resizable
+- [x] Poprawiæ odpalanie w¹tku do nas³uchiwania wiadomoœci
 - [x] Dodaæ zawijanie wierszy
+- [x] Dodaæ wiadomoœci o do³¹czeniu/opuszczeniu czatu
+- [x] Dodaæ zabezpieczenie przed timeoutami (Powinno dzia³aæ, ale po timeoucie zalecam rêczne zrestartowanie czatu)
