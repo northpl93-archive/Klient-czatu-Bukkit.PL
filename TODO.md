@@ -1,4 +1,5 @@
 Znane problemy:
+- [x] Has³o nie jest ukrywane
 - [x] Nie dzia³a wysy³anie polskich znaków
 - [x] Nie dzia³a odbieranie wiadomoœci gdy siê nie zalogujemy
 - [x] Nie dzia³a pobieranie nicków administracji
@@ -14,3 +15,4 @@ Do zrobienia:
 - [x] Dodaæ zawijanie wierszy
 - [x] Dodaæ wiadomoœci o do³¹czeniu/opuszczeniu czatu
 - [x] Dodaæ zabezpieczenie przed timeoutami (Powinno dzia³aæ, ale po timeoucie zalecam rêczne zrestartowanie czatu)
+- [x] System komend
