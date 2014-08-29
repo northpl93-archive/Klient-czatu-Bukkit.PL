@@ -19,6 +19,7 @@ import me.northpl93.WathDogThread;
 import me.northpl93.utils.XenForoUtils;
 
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 public class WelcomePanel extends JPanel {
 	private JTextField textField;
@@ -138,6 +139,11 @@ public class WelcomePanel extends JPanel {
 		chckbxRollOnNewPost.setSelected(true);
 		chckbxRollOnNewPost.setBounds(414, 138, 230, 23);
 		add(chckbxRollOnNewPost);
+		
+		JLabel lblWersjaLol = new JLabel("Wersja "+Main.VERSION);
+		lblWersjaLol.setForeground(Color.LIGHT_GRAY);
+		lblWersjaLol.setBounds(0, 303, 152, 14);
+		add(lblWersjaLol);
 
 	}
 }

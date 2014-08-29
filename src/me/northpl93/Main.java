@@ -25,10 +25,12 @@ public class Main
 	public static boolean debugOnChat     = false;
 	public static boolean rollOnNewPost   = true;
 	
+	public static final String VERSION    = "v1.3.0";
+	
 	
 	public static void main(String[] args)
 	{
-		System.out.println("start");
+		System.out.println("start "+VERSION);
 		CookieHandler.setDefault( new CookieManager( null, CookiePolicy.ACCEPT_ALL ) );
 		
 		EventQueue.invokeLater(new Runnable() {
