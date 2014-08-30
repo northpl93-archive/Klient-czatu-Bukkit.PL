@@ -71,7 +71,14 @@ public class UsersListenThread extends Thread
 			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.removeAll();
 			for(String s : users)
 			{
-				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s);
+				if(s.equalsIgnoreCase(Main.loggedUserName))
+				{
+					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s+" (Ty)");
+				}
+				else
+				{
+					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s);
+				}
 			}
 			
 			newUsers = new ArrayList<String>(Arrays.asList(users));
