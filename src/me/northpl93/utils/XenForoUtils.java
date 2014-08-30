@@ -2,6 +2,8 @@ package me.northpl93.utils;
 
 import javax.swing.JOptionPane;
 
+import com.google.gson.Gson;
+
 import me.northpl93.Main;
 
 public class XenForoUtils
@@ -48,5 +50,22 @@ public class XenForoUtils
 				+ "_xfResponseType=json";
 		String response = PostExecute.excutePost("http://bukkit.pl/logout/", rawData);
 		Main.debug("XenForoUtils -> logout -> response: "+response);
+	}
+	
+	public static String toggleVisibility(String xfToken, boolean visible)
+	{
+		String rawData =
+				"_xfToken="+xfToken+"&"
+				+ "_xfNoRedirect=1&"
+				+ "_xfResponseType=json";
+		if(visible)
+		{
+			rawData = rawData+"&visible=1";
+		}
+		String response = PostExecute.excutePost("http://bukkit.pl/account/toggle-visibility", rawData);
+		Gson gson = new Gson();
+		JsonToggleVisibilityParser object = gson.fromJson(response, JsonToggleVisibilityParser.class);
+		Main.debug("XenForoUtils -> toggleVisibility -> response: "+response);
+		return object.get_redirectMessage();
 	}
 }

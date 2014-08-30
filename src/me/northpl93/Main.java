@@ -70,5 +70,6 @@ public class Main
 	private static void registerCommands()
 	{
 		cmdMngr.registerCommand(new Help());
+		cmdMngr.registerCommand(new ToggleVisibility());
 	}
 }
