@@ -21,6 +21,8 @@ public class Main
 	public static JFrame window           = null;
 	public static CommandManager cmdMngr  = null;
 	
+	public static String loggedUserName   = null;
+	
 	public static boolean debugOnConsole  = false;
 	public static boolean debugOnChat     = false;
 	public static boolean rollOnNewPost   = true;

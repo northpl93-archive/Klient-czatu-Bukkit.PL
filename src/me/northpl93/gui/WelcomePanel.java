@@ -22,6 +22,7 @@ import javax.swing.JCheckBox;
 import java.awt.Color;
 
 public class WelcomePanel extends JPanel {
+	private static final long serialVersionUID = -434001661639687739L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JCheckBox chckbxConsoleDebug;
@@ -84,6 +85,7 @@ public class WelcomePanel extends JPanel {
 		        });
 				
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
+				Main.loggedUserName = textField.getText(); //Zapisanie nazwy zalogowanego u¿ytkownika
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
 				Main.usersListener.start();
 				Main.wathDogThread = new WathDogThread();
