@@ -47,16 +47,16 @@ public class WelcomePanel extends JPanel {
 				if(textField.getText() == null || textField_1.getText() == null || textField.getText().equalsIgnoreCase("") || textField_1.getText().equalsIgnoreCase(""))
 				{
 					JOptionPane.showMessageDialog(null, "Któreœ z podanych pól pozostawi³eœ puste! Nie bêdziesz móg³ pisaæ wiadomoœci :C");
-			        
+					
 					SwingUtilities.invokeLater(new Runnable()
 					{
-			            @Override
-			            public void run()
-			            {
+						@Override
+						public void run()
+						{
 							Main.window.setContentPane(PanelsEnum.CHAT_PANEL.getInstance());
 							Main.window.revalidate();
-			            }
-			        });
+						}
+					});
 					
 					if(Main.chatListener == null)
 					{

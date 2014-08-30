@@ -19,4 +19,9 @@ public class JsonResponseParser
 	{
 		return lastrefresh;
 	}
+	
+	public int getReverse()
+	{
+		return reverse;
+	}
 }
