@@ -57,6 +57,8 @@ public class ChatPanel extends JPanel  {
 				}
 				XenForoUtils.sendMessage(((ChatListenThread)Main.chatListener).getLoggedUser(), wiadomoscDoWyslania.getText());
 				wiadomoscDoWyslania.setText("");
+				Main.debug(((ChatListenThread)Main.chatListener).getLoggedUser());
+				Main.debug(Main.cookieHandler.getCookieStore().getCookies().toString());
 			}
 		});
 		przyciskOdWysylania.setBounds(510, 301, 95, 23);
@@ -108,8 +110,21 @@ public class ChatPanel extends JPanel  {
         vertical = jScrollPane.getVerticalScrollBar();
 	}
 	
+	/**
+	 * Przewija czat na dó³
+	 */
 	public void scrollToDown()
 	{
         vertical.setValue( vertical.getMaximum() );
+	}
+	
+	public void addMessage(String msg)
+	{
+		this.textArea.append(msg);
+		if(Main.rollOnNewPost)
+		{
+			this.scrollToDown();
+		}
+		Main.window.revalidate();
 	}
 }

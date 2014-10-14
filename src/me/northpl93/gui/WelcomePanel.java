@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
@@ -23,11 +22,11 @@ import java.awt.Color;
 
 public class WelcomePanel extends JPanel {
 	private static final long serialVersionUID = -434001661639687739L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JCheckBox chckbxConsoleDebug;
+	private JTextField textField; //Login
+	private JTextField textField_1; //Haslo
 	private JCheckBox chckbxChatDebug;
 	private JCheckBox chckbxRollOnNewPost;
+	private JCheckBox chckbxCzyZapamietacSesje;
 
 	/**
 	 * Create the panel.
@@ -40,23 +39,14 @@ public class WelcomePanel extends JPanel {
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				Main.debugOnConsole = chckbxConsoleDebug.isSelected();
+				Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
 				Main.debugOnChat = chckbxChatDebug.isSelected();
 				Main.rollOnNewPost = chckbxRollOnNewPost.isSelected();
+				Main.saveSession = chckbxCzyZapamietacSesje.isSelected();
 				
 				if(textField.getText() == null || textField_1.getText() == null || textField.getText().equalsIgnoreCase("") || textField_1.getText().equalsIgnoreCase(""))
 				{
 					JOptionPane.showMessageDialog(null, "Któreœ z podanych pól pozostawi³eœ puste! Nie bêdziesz móg³ pisaæ wiadomoœci :C");
-					
-					SwingUtilities.invokeLater(new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							Main.window.setContentPane(PanelsEnum.CHAT_PANEL.getInstance());
-							Main.window.revalidate();
-						}
-					});
 					
 					if(Main.chatListener == null)
 					{
@@ -71,18 +61,9 @@ public class WelcomePanel extends JPanel {
 					Main.usersListener.start();
 					Main.wathDogThread = new WathDogThread();
 					Main.wathDogThread.start();
+					Main.switchPanel(PanelsEnum.CHAT_PANEL.getInstance());
 					return;
 				}
-				
-				SwingUtilities.invokeLater(new Runnable()
-				{
-		            @Override
-		            public void run()
-		            {
-						Main.window.setContentPane(PanelsEnum.CHAT_PANEL.getInstance());
-						Main.window.revalidate();
-		            }
-		        });
 				
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
 				Main.loggedUserName = textField.getText(); //Zapisanie nazwy zalogowanego u¿ytkownika
@@ -90,6 +71,7 @@ public class WelcomePanel extends JPanel {
 				Main.usersListener.start();
 				Main.wathDogThread = new WathDogThread();
 				Main.wathDogThread.start();
+				Main.switchPanel(PanelsEnum.CHAT_PANEL.getInstance());
 				return;
 			}
 		});
@@ -129,23 +111,23 @@ public class WelcomePanel extends JPanel {
 		lblSkonfigurujOpcje.setBounds(457, 62, 110, 14);
 		add(lblSkonfigurujOpcje);
 		
-		chckbxConsoleDebug = new JCheckBox("Debuguj na konsole");
-		chckbxConsoleDebug.setBounds(414, 86, 230, 23);
-		add(chckbxConsoleDebug);
-		
 		chckbxChatDebug = new JCheckBox("Debuguj na czat");
-		chckbxChatDebug.setBounds(414, 112, 230, 23);
+		chckbxChatDebug.setBounds(414, 86, 230, 23);
 		add(chckbxChatDebug);
 		
 		chckbxRollOnNewPost = new JCheckBox("Przewijaj gdy pojawi si\u0119 nowy post");
 		chckbxRollOnNewPost.setSelected(true);
-		chckbxRollOnNewPost.setBounds(414, 138, 230, 23);
+		chckbxRollOnNewPost.setBounds(414, 112, 230, 23);
 		add(chckbxRollOnNewPost);
 		
 		JLabel lblWersjaLol = new JLabel("Wersja "+Main.VERSION);
 		lblWersjaLol.setForeground(Color.LIGHT_GRAY);
 		lblWersjaLol.setBounds(0, 303, 152, 14);
 		add(lblWersjaLol);
+		
+		chckbxCzyZapamietacSesje = new JCheckBox("Zapami\u0119ta\u0107 sesj\u0119?");
+		chckbxCzyZapamietacSesje.setBounds(75, 145, 142, 23);
+		add(chckbxCzyZapamietacSesje);
 
 	}
 }
