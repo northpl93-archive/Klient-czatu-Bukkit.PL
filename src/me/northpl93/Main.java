@@ -36,7 +36,6 @@ public class Main
 	
 	public static boolean debugOnChat            = false;
 	public static boolean rollOnNewPost          = true;
-	public static boolean saveSession            = false;
 	
 	public static final String VERSION           = "1.4.0 INDEV";
 	
@@ -56,14 +55,14 @@ public class Main
 		
 		initializeConfig();
 		
-		if(config.getStoredCookies().size() >= 2) //Ciasteczka s¹ zwykle 3 wiêc powinno byæ ok
+		if(config.isSessionStored())
 		{
-			debug("Znaleziono klucz sesji. Ustawianie panelu na SESSION_RESTORE_PANEL");
+			debug("W configu jest informacja o zachowanych danych logowania");
 			switchPanel(PanelsEnum.SESSION_RESTORE_PANEL.getInstance()); //Ustawienie panelu na przywracanie sesji
 		}
 		else
 		{
-			debug("Nie znaleziono klucza sesji. Ustawianie panelu na logowanie");
+			debug("W configu nie ma informacji o koniecznosci przywracania sesji");
 			switchPanel(PanelsEnum.WELCOME_PANEL.getInstance()); //Ustawienie panelu na logowanie
 		}
 	}

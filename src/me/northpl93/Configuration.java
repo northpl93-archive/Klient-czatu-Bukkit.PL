@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.northpl93.utils.HttpCookieWrapper;
+import org.apache.commons.codec.binary.Base64;
 
 public class Configuration implements Serializable
 {
 	private static final long serialVersionUID    = 1; //Wersja configu 1
 	
 	private List<String> blockedUsers      = null;
+	private boolean isSessionStored        = false;
 	private String storedNick              = null;
-	private String storedXfToken           = null;
-	private List<HttpCookieWrapper> storedCookies = null;          
+	private byte[] storedPassword          = null;
 	
 	/**
 	 * Metoda która ustawi wartoœci na domyœlne
 	 */
 	public void setDefaults()
 	{
-		storedXfToken = "";
+		setSessionStored(false);
 		blockedUsers = new ArrayList<String>();
-		storedCookies = new ArrayList<HttpCookieWrapper>();
 		storedNick = "";
+		storedPassword = new byte[0];
 	}
 	
 	public List<String> getBlockedUsers()
@@ -36,16 +36,6 @@ public class Configuration implements Serializable
 		this.blockedUsers = blockedUsers;
 	}
 	
-	public List<HttpCookieWrapper> getStoredCookies()
-	{
-		return storedCookies;
-	}
-	
-	public void setStoredCookies(List<HttpCookieWrapper> list)
-	{
-		this.storedCookies = list;
-	}
-	
 	public String getStoredNick()
 	{
 		return storedNick;
@@ -55,14 +45,24 @@ public class Configuration implements Serializable
 	{
 		this.storedNick = storedNick;
 	}
-
-	public String getStoredXfToken()
+	
+	public String getStoredPassword()
 	{
-		return storedXfToken;
+		return new String(Base64.decodeBase64(this.storedPassword));
+	}
+	
+	public void setStoredPassword(String password)
+	{
+		this.storedPassword = Base64.encodeBase64(password.getBytes());
 	}
 
-	public void setStoredXfToken(String storedXfToken)
+	public boolean isSessionStored()
 	{
-		this.storedXfToken = storedXfToken;
+		return isSessionStored;
+	}
+
+	public void setSessionStored(boolean isSessionStored)
+	{
+		this.isSessionStored = isSessionStored;
 	}
 }

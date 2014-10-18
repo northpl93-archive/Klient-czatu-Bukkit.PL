@@ -9,14 +9,10 @@ import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
 import me.northpl93.UsersListenThread;
 import me.northpl93.WathDogThread;
-import me.northpl93.utils.HttpCookieWrapper;
+import me.northpl93.utils.XenForoUtils;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.net.HttpCookie;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 public class SessionRestorePanel extends JPanel
 {
@@ -28,7 +24,7 @@ public class SessionRestorePanel extends JPanel
 	public SessionRestorePanel() {
 		setLayout(null);
 		
-		JLabel lblCzyChceszPrzywrci = new JLabel("Czy chcesz przywr\u00F3ci\u0107 poprzedni\u0105 sesj\u0119?");
+		JLabel lblCzyChceszPrzywrci = new JLabel("Czy chcesz zalogowa\u0107 si\u0119 ponownie poprzednimi danymi?");
 		lblCzyChceszPrzywrci.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCzyChceszPrzywrci.setBounds(10, 133, 630, 14);
 		add(lblCzyChceszPrzywrci);
@@ -37,29 +33,15 @@ public class SessionRestorePanel extends JPanel
 		btnTak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.debug("User chce przwróciæ sesjê...");
-				Main.saveSession = true;
+				Main.config.setSessionStored(true);
 				if(Main.chatListener == null)
 				{
 					Main.chatListener = new ChatListenThread();
 				}
-				((ChatListenThread) Main.chatListener).setLoggedUser(Main.config.getStoredXfToken());
-				Main.debug("Przywrócony xfToken: "+Main.config.getStoredXfToken());
+				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.config.getStoredNick(), Main.config.getStoredPassword()));
 				Main.loggedUserName = Main.config.getStoredNick();
 				Main.debug("Przywrócony nick: "+Main.config.getStoredNick());
-				Main.debug(Main.cookieHandler.getCookieStore().getURIs().toString());
-				for(HttpCookieWrapper cookie : Main.config.getStoredCookies())
-				{
-					HttpCookie javaCookie = cookie.returnHttpCookie();
-					Main.debug("Przywracanie ciasteczka: "+javaCookie+" ("+javaCookie.getDomain()+", "+javaCookie.getPath()+", "+javaCookie.getName()+", "+javaCookie.getValue()+")");
-					try
-					{
-						Main.cookieHandler.getCookieStore().add(new URI(javaCookie.getPath()), javaCookie);
-					}
-					catch (URISyntaxException e1)
-					{
-						e1.printStackTrace();
-					}
-				}
+				Main.debug("Przywrocono sesje!");
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
 				if(Main.usersListener == null)
 				{
@@ -79,8 +61,8 @@ public class SessionRestorePanel extends JPanel
 			public void actionPerformed(ActionEvent e) {
 				Main.debug("User nie chcia³ przywracaæ sesji.");
         		Main.config.setStoredNick(null);
-        		Main.config.setStoredXfToken(null);
-        		Main.config.setStoredCookies(new ArrayList<HttpCookieWrapper>());
+        		Main.config.setStoredPassword("");
+        		Main.config.setSessionStored(false);
 				Main.switchPanel(PanelsEnum.WELCOME_PANEL.getInstance());
 			}
 		});

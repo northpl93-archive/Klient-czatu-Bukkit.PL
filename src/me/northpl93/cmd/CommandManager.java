@@ -3,7 +3,6 @@ package me.northpl93.cmd;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import me.northpl93.Main;
 import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.PanelsEnum;
 
@@ -39,7 +38,8 @@ public class CommandManager
 				return;
 			}
 		}
-		sendMessage("Nie znaleziono komendy! Wpisz /help aby uzyskaæ listê komend");
+		((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance())
+		.addMessage("Nie znaleziono komendy! Wpisz /help aby uzyskaæ listê komend");
 	}
 	
 	public ArrayList<CommandExecutor> getCommands()
@@ -47,13 +47,8 @@ public class CommandManager
 		return cmds;
 	}
 	
-	public void sendMessage(String text)
+	public void sendMessage(String msg)
 	{
-		((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append(text+"\n");
-		if(Main.rollOnNewPost)
-		{
-			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
-		}
-		Main.window.revalidate();
+		((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage(msg);
 	}
 }

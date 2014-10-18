@@ -2,14 +2,11 @@ package me.northpl93.gui;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.HttpCookie;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import me.northpl93.ChatListenThread;
 import me.northpl93.Main;
-import me.northpl93.utils.HttpCookieWrapper;
 import me.northpl93.utils.XenForoUtils;
 
 public class ChatWindow extends JFrame
@@ -30,6 +27,7 @@ public class ChatWindow extends JFrame
             @Override
             public void windowClosing(WindowEvent e)
             {
+            	Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
             	Main.debug("Otrzymano polecenie zamkniêcia programu... Sprawdzanie czy nie ma klucza sesji...");
                 if(Main.chatListener != null)
                 {
@@ -38,30 +36,21 @@ public class ChatWindow extends JFrame
 	                	if(((ChatListenThread)Main.chatListener).getLoggedUser().length() > 0)
 	                	{
 	                		Main.debug("Znaleziono aktywny klucz sesji.");
-	                		if(Main.saveSession)
+	                		if(Main.config.isSessionStored())
 	                		{
-	                			Main.debug("W³¹czono opcjê zapisywania sesji. Polecenie wylogowania nie zostanie wys³ane...");
-	                			
-	                			ArrayList<HttpCookieWrapper> tempCookieWrapper = new ArrayList<HttpCookieWrapper>(Main.cookieHandler.getCookieStore().getCookies().size());
-	                			
-	                			for(HttpCookie ckts : Main.cookieHandler.getCookieStore().getCookies())
-	                			{
-	                				tempCookieWrapper.add(new HttpCookieWrapper(ckts));
-	                			}
-	                			
-	                			Main.config.setStoredCookies(tempCookieWrapper);
-	                			Main.config.setStoredXfToken(((ChatListenThread)Main.chatListener).getLoggedUser());
+	                			Main.debug("W³¹czono opcjê zapisywania sesji.");
+	                			XenForoUtils.logout(((ChatListenThread)Main.chatListener).getLoggedUser());
 	                			Main.saveConfig();
 	                			e.getWindow().dispose();
 	                			return;
 	                		}
 	                		Main.debug("Zapamiêtywanie sesji nie jest w³¹czone. Wysy³anie polecenia wylogowania...");
-	                		Main.config.setStoredNick(null);
-	                		Main.config.setStoredXfToken(null);
-	                		Main.config.setStoredCookies(new ArrayList<HttpCookieWrapper>());
+	                		Main.config.setStoredNick("");
+	                		Main.config.setStoredPassword("");
+	                		Main.config.setSessionStored(false);
 	                		XenForoUtils.logout(((ChatListenThread)Main.chatListener).getLoggedUser());
-	                		e.getWindow().dispose();
 	                		Main.saveConfig();
+	                		e.getWindow().dispose();
 	                		return;
 	                	}
                 	}
