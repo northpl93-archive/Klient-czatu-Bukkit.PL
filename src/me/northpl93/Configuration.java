@@ -15,6 +15,11 @@ public class Configuration implements Serializable
 	private String storedNick              = null;
 	private byte[] storedPassword          = null;
 	
+	public Configuration()
+	{
+		setDefaults();
+	}
+	
 	/**
 	 * Metoda która ustawi wartoœci na domyœlne
 	 */

@@ -10,6 +10,7 @@ Znane problemy:
 Do zrobienia:
 - [ ] Poprawiæ parsowanie htmla (wywaliæ te pêtle ;_;)
 - [ ] Zrobiæ ¿eby okienko mog³o byæ resizable
+- [x] Dodaæ zapisywanie sesji
 - [x] Dodaæ maskowanie has³a
 - [x] Poprawiæ odpalanie w¹tku do nas³uchiwania wiadomoœci
 - [x] Dodaæ zawijanie wierszy

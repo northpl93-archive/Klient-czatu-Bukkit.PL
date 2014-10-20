@@ -6,6 +6,7 @@ import java.util.Arrays;
 import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.PanelsEnum;
 import me.northpl93.utils.JsonUsersResponseParser;
+import me.northpl93.utils.NotificationWindow;
 import me.northpl93.utils.PostExecute;
 
 import org.jsoup.Jsoup;
@@ -89,6 +90,10 @@ public class UsersListenThread extends Thread
 				{
 					if(!newUsers.contains(s))
 					{
+						if(!Main.window.isActive())
+						{
+							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" opuœci³ czat!", NotificationWindow.Icons.USER.getIco());
+						}
 						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] - U¿ytkownik "+s+" opuœci³ czat\n");
 						if(Main.rollOnNewPost)
 						{
@@ -102,6 +107,10 @@ public class UsersListenThread extends Thread
 				{
 					if(!latestUsers.contains(s))
 					{
+						if(!Main.window.isActive())
+						{
+							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" do³¹czy³ do czatu!", NotificationWindow.Icons.USER.getIco());
+						}
 						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] + U¿ytkownik "+s+" do³¹czy³ do czatu\n");
 						if(Main.rollOnNewPost)
 						{
