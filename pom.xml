@@ -5,6 +5,9 @@
   <version>1.4-INDEV</version>
   <name>Klient czatu Bukkit.pl</name>
   <description>Aplikacja umożliwiająca romowę na czacie bukkit.pl bez uruchamiania przeglądarki</description>
+  <properties>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
