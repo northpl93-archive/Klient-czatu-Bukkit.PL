@@ -33,14 +33,14 @@ public class SessionRestorePanel extends JPanel
 		btnTak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.debug("User chce przwróciæ sesjê...");
-				Main.config.setSessionStored(true);
+				Main.getConfig().setSessionStored(true);
 				if(Main.chatListener == null)
 				{
 					Main.chatListener = new ChatListenThread();
 				}
-				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.config.getStoredNick(), Main.config.getStoredPassword()));
-				Main.loggedUserName = Main.config.getStoredNick();
-				Main.debug("Przywrócony nick: "+Main.config.getStoredNick());
+				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.getConfig().getStoredNick(), Main.getConfig().getStoredPassword()));
+				Main.loggedUserName = Main.getConfig().getStoredNick();
+				Main.debug("Przywrócony nick: "+Main.getConfig().getStoredNick());
 				Main.debug("Przywrocono sesje!");
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
 				if(Main.usersListener == null)
@@ -60,9 +60,9 @@ public class SessionRestorePanel extends JPanel
 		btnNie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.debug("User nie chcia³ przywracaæ sesji.");
-        		Main.config.setStoredNick(null);
-        		Main.config.setStoredPassword("");
-        		Main.config.setSessionStored(false);
+        		Main.getConfig().setStoredNick(null);
+        		Main.getConfig().setStoredPassword("");
+        		Main.getConfig().setSessionStored(false);
 				Main.switchPanel(PanelsEnum.WELCOME_PANEL.getInstance());
 			}
 		});

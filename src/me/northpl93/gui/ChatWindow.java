@@ -36,7 +36,7 @@ public class ChatWindow extends JFrame
 	                	if(((ChatListenThread)Main.chatListener).getLoggedUser().length() > 0)
 	                	{
 	                		Main.debug("Znaleziono aktywny klucz sesji.");
-	                		if(Main.config.isSessionStored())
+	                		if(Main.getConfig().isSessionStored())
 	                		{
 	                			Main.debug("W³¹czono opcjê zapisywania sesji.");
 	                			XenForoUtils.logout(((ChatListenThread)Main.chatListener).getLoggedUser());
@@ -45,9 +45,9 @@ public class ChatWindow extends JFrame
 	                			return;
 	                		}
 	                		Main.debug("Zapamiêtywanie sesji nie jest w³¹czone. Wysy³anie polecenia wylogowania...");
-	                		Main.config.setStoredNick("");
-	                		Main.config.setStoredPassword("");
-	                		Main.config.setSessionStored(false);
+	                		Main.getConfig().setStoredNick("");
+	                		Main.getConfig().setStoredPassword("");
+	                		Main.getConfig().setSessionStored(false);
 	                		XenForoUtils.logout(((ChatListenThread)Main.chatListener).getLoggedUser());
 	                		Main.saveConfig();
 	                		e.getWindow().dispose();

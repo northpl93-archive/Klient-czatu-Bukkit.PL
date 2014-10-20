@@ -90,7 +90,7 @@ public class UsersListenThread extends Thread
 				{
 					if(!newUsers.contains(s))
 					{
-						if(!Main.window.isActive())
+						if(!Main.getMainWindow().isActive())
 						{
 							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" opuœci³ czat!", NotificationWindow.Icons.USER.getIco());
 						}
@@ -99,7 +99,7 @@ public class UsersListenThread extends Thread
 						{
 							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
 						}
-						Main.window.revalidate();
+						Main.getMainWindow().revalidate();
 					}
 				}
 				
@@ -107,7 +107,7 @@ public class UsersListenThread extends Thread
 				{
 					if(!latestUsers.contains(s))
 					{
-						if(!Main.window.isActive())
+						if(!Main.getMainWindow().isActive())
 						{
 							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" do³¹czy³ do czatu!", NotificationWindow.Icons.USER.getIco());
 						}
@@ -116,7 +116,7 @@ public class UsersListenThread extends Thread
 						{
 							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
 						}
-						Main.window.revalidate();
+						Main.getMainWindow().revalidate();
 					}
 				}
 			}

@@ -25,10 +25,10 @@ public class Main
 	public static Thread chatListener            = null;
 	public static Thread usersListener           = null;
 	public static Thread wathDogThread           = null;
-	public static JFrame window                  = null;
-	public static CommandManager cmdMngr         = null;
-	public static CookieManager cookieHandler    = null;
-	public static Configuration config           = null;
+	private static JFrame window                  = null;
+	private static CommandManager cmdMngr         = null;
+	private static CookieManager cookieHandler    = null;
+	private static Configuration config           = null;
 	
 	public static File configFile                = null;
 	
@@ -181,5 +181,20 @@ public class Main
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static JFrame getMainWindow()
+	{
+		return window;
+	}
+	
+	public static CommandManager getCommandManager()
+	{
+		return cmdMngr;
+	}
+	
+	public static Configuration getConfig()
+	{
+		return config;
 	}
 }

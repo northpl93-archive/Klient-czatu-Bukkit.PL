@@ -51,14 +51,12 @@ public class ChatPanel extends JPanel  {
 				
 				if(wiadomoscDoWyslania.getText().startsWith("/"))
 				{
-					Main.cmdMngr.handleCommand(wiadomoscDoWyslania.getText().substring(1));
+					Main.getCommandManager().handleCommand(wiadomoscDoWyslania.getText().substring(1));
 					wiadomoscDoWyslania.setText("");
 					return;
 				}
 				XenForoUtils.sendMessage(((ChatListenThread)Main.chatListener).getLoggedUser(), wiadomoscDoWyslania.getText());
 				wiadomoscDoWyslania.setText("");
-				Main.debug(((ChatListenThread)Main.chatListener).getLoggedUser());
-				Main.debug(Main.cookieHandler.getCookieStore().getCookies().toString());
 			}
 		});
 		przyciskOdWysylania.setBounds(510, 301, 95, 23);
@@ -125,6 +123,6 @@ public class ChatPanel extends JPanel  {
 		{
 			this.scrollToDown();
 		}
-		Main.window.revalidate();
+		Main.getMainWindow().revalidate();
 	}
 }

@@ -28,7 +28,7 @@ public class SwingKeyListener implements KeyListener
 			
 			if(cp.wiadomoscDoWyslania.getText().startsWith("/"))
 			{
-				Main.cmdMngr.handleCommand(cp.wiadomoscDoWyslania.getText().substring(1));
+				Main.getCommandManager().handleCommand(cp.wiadomoscDoWyslania.getText().substring(1));
 				cp.wiadomoscDoWyslania.setText("");
 				return;
 			}
