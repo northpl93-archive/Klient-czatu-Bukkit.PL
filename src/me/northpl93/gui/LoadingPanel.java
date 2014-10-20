@@ -27,7 +27,7 @@ public class LoadingPanel extends JPanel
 		progressBar.setIndeterminate(true);
 		add(progressBar);
 		
-		JLabel lblWersjaLol = new JLabel("Wersja "+Main.VERSION);
+		JLabel lblWersjaLol = new JLabel("Wersja "+Main.getVersion());
 		lblWersjaLol.setForeground(Color.LIGHT_GRAY);
 		lblWersjaLol.setBounds(0, 303, 152, 14);
 		add(lblWersjaLol);

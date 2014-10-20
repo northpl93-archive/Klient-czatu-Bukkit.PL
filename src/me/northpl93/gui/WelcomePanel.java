@@ -93,7 +93,7 @@ public class WelcomePanel extends JPanel {
 		chckbxRollOnNewPost.setBounds(414, 112, 230, 23);
 		add(chckbxRollOnNewPost);
 		
-		JLabel lblWersjaLol = new JLabel("Wersja "+Main.VERSION);
+		JLabel lblWersjaLol = new JLabel("Wersja "+Main.getVersion());
 		lblWersjaLol.setForeground(Color.LIGHT_GRAY);
 		lblWersjaLol.setBounds(0, 303, 152, 14);
 		add(lblWersjaLol);

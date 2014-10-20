@@ -25,16 +25,16 @@ public class Main
 	public static Thread chatListener            = null;
 	public static Thread usersListener           = null;
 	public static Thread wathDogThread           = null;
-	private static JFrame window                  = null;
-	private static CommandManager cmdMngr         = null;
-	private static CookieManager cookieHandler    = null;
-	private static Configuration config           = null;
+	private static JFrame window                 = null;
+	private static CommandManager cmdMngr        = null;
+	private static CookieManager cookieHandler   = null;
+	private static Configuration config          = null;
 	
-	private static File configFile                = null;
+	private static File configFile               = null;
 	
-	private static String loggedUserName          = "";
+	private static String loggedUserName         = "";
 	
-	public static final String VERSION           = "1.4.0 INDEV";
+	private static final String VERSION          = "1.4.0 INDEV";
 	
 	
 	public static void main(String[] args)
@@ -203,5 +203,10 @@ public class Main
 	public static void setLoggedUserName(String _loggedUserName)
 	{
 		loggedUserName = _loggedUserName;
+	}
+	
+	public static String getVersion()
+	{
+		return VERSION;
 	}
 }
