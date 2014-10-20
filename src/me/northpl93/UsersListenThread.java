@@ -72,7 +72,7 @@ public class UsersListenThread extends Thread
 			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.removeAll();
 			for(String s : users)
 			{
-				if(s.equalsIgnoreCase(Main.loggedUserName))
+				if(s.equalsIgnoreCase(Main.getLoggedUserName()))
 				{
 					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s+" (Ty)");
 				}
@@ -94,12 +94,7 @@ public class UsersListenThread extends Thread
 						{
 							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" opuœci³ czat!", NotificationWindow.Icons.USER.getIco());
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] - U¿ytkownik "+s+" opuœci³ czat\n");
-						if(Main.rollOnNewPost)
-						{
-							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
-						}
-						Main.getMainWindow().revalidate();
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] - U¿ytkownik "+s+" opuœci³ czat\n");
 					}
 				}
 				
@@ -111,12 +106,7 @@ public class UsersListenThread extends Thread
 						{
 							new NotificationWindow("Czat bukkit.pl", "U¿ytkownik "+s+" do³¹czy³ do czatu!", NotificationWindow.Icons.USER.getIco());
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append("[INFO] + U¿ytkownik "+s+" do³¹czy³ do czatu\n");
-						if(Main.rollOnNewPost)
-						{
-							((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
-						}
-						Main.getMainWindow().revalidate();
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] + U¿ytkownik "+s+" do³¹czy³ do czatu\n");
 					}
 				}
 			}

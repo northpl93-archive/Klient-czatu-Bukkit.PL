@@ -30,12 +30,9 @@ public class Main
 	private static CookieManager cookieHandler    = null;
 	private static Configuration config           = null;
 	
-	public static File configFile                = null;
+	private static File configFile                = null;
 	
-	public static String loggedUserName          = "";
-	
-	public static boolean debugOnChat            = false;
-	public static boolean rollOnNewPost          = true;
+	private static String loggedUserName          = "";
 	
 	public static final String VERSION           = "1.4.0 INDEV";
 	
@@ -76,7 +73,7 @@ public class Main
 	{
 		System.out.println(message);
 		
-		if(debugOnChat)
+		if(getConfig().isDebugOnChat())
 		{
 			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[DEBUG] "+message);
 		}
@@ -196,5 +193,15 @@ public class Main
 	public static Configuration getConfig()
 	{
 		return config;
+	}
+	
+	public static String getLoggedUserName()
+	{
+		return loggedUserName;
+	}
+	
+	public static void setLoggedUserName(String _loggedUserName)
+	{
+		loggedUserName = _loggedUserName;
 	}
 }

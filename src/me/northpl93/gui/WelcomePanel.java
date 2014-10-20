@@ -102,14 +102,17 @@ public class WelcomePanel extends JPanel {
 		chckbxCzyZapamietacSesje.setBounds(75, 145, 142, 23);
 		add(chckbxCzyZapamietacSesje);
 		chckbxCzyZapamietacSesje.addKeyListener(lpskl);
-
+		
+		//Wczytywanie danych z configu
+		chckbxChatDebug.setSelected(Main.getConfig().isDebugOnChat());
+		chckbxRollOnNewPost.setSelected(Main.getConfig().isRollOnNewPost());
 	}
 	
 	public void loginStuff() //Wywo³ywane przy logowaniu
 	{
 		Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
-		Main.debugOnChat = chckbxChatDebug.isSelected();
-		Main.rollOnNewPost = chckbxRollOnNewPost.isSelected();
+		Main.getConfig().setDebugOnChat(chckbxChatDebug.isSelected());
+		Main.getConfig().setRollOnNewPost(chckbxRollOnNewPost.isSelected());
 		Main.getConfig().setSessionStored(chckbxCzyZapamietacSesje.isSelected());
 		
 		if(textField.getText() == null || textField_1.getText() == null || textField.getText().equalsIgnoreCase("") || textField_1.getText().equalsIgnoreCase(""))
@@ -119,7 +122,7 @@ public class WelcomePanel extends JPanel {
 			Main.getConfig().setSessionStored(false); //Zeby nie probowalo przy kolejnym starcie wczytywac pustej sesji...
 			Main.getConfig().setStoredNick("");
 			Main.getConfig().setStoredPassword("");
-			Main.loggedUserName = "";
+			Main.setLoggedUserName("");
 			
 			if(Main.chatListener == null)
 			{
@@ -139,7 +142,7 @@ public class WelcomePanel extends JPanel {
 		}
 		
 		((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
-		Main.loggedUserName = textField.getText(); //Zapisanie nazwy zalogowanego u¿ytkownika
+		Main.setLoggedUserName(textField.getText()); //Zapisanie nazwy zalogowanego u¿ytkownika
 		Main.getConfig().setStoredNick(textField.getText());
 		Main.getConfig().setStoredPassword(textField_1.getText());
 		Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa

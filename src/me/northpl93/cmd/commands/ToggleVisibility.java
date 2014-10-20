@@ -50,7 +50,7 @@ public class ToggleVisibility implements CommandExecutor
 			return;
 		}
 		
-		if(Main.loggedUserName.isEmpty() || ((ChatListenThread)Main.chatListener).getLoggedUser().isEmpty())
+		if(Main.getLoggedUserName().isEmpty() || ((ChatListenThread)Main.chatListener).getLoggedUser().isEmpty())
 		{
 			cmdMngr.sendMessage("Musisz byæ zalogowany, aby u¿yæ tej komendy");
 			return;

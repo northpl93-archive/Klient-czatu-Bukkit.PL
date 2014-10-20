@@ -39,7 +39,7 @@ public class SessionRestorePanel extends JPanel
 					Main.chatListener = new ChatListenThread();
 				}
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.getConfig().getStoredNick(), Main.getConfig().getStoredPassword()));
-				Main.loggedUserName = Main.getConfig().getStoredNick();
+				Main.setLoggedUserName(Main.getConfig().getStoredNick());
 				Main.debug("Przywrócony nick: "+Main.getConfig().getStoredNick());
 				Main.debug("Przywrocono sesje!");
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa

@@ -119,7 +119,7 @@ public class ChatPanel extends JPanel  {
 	public void addMessage(String msg)
 	{
 		this.textArea.append(msg);
-		if(Main.rollOnNewPost)
+		if(Main.getConfig().isRollOnNewPost())
 		{
 			this.scrollToDown();
 		}

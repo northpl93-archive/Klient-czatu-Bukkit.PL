@@ -74,7 +74,7 @@ public class ChatListenThread extends Thread
 				
 				for(Element el : element.getElementsByClass("username"))
 				{
-					if(!Main.loggedUserName.equalsIgnoreCase(el.text()) && !Main.getMainWindow().isActive())
+					if(!Main.getLoggedUserName().equalsIgnoreCase(el.text()) && !Main.getMainWindow().isActive())
 					{
 						new NotificationWindow("Czat bukkit.pl", "Nowa wiadomoœæ od u¿ytkownika "+el.text(), NotificationWindow.Icons.CHAT.getIco());
 					}
@@ -109,12 +109,7 @@ public class ChatListenThread extends Thread
 					sb.append("\n");
 				}
 				
-				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).textArea.append(sb.toString());
-				if(Main.rollOnNewPost)
-				{
-					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).scrollToDown();
-				}
-				Main.getMainWindow().revalidate();
+				((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage(sb.toString());
 			}
 			
 			latestMessage = obj2.getLatestPostId();

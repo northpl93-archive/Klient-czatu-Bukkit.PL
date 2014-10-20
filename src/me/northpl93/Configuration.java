@@ -11,9 +11,13 @@ public class Configuration implements Serializable
 	private static final long serialVersionUID    = 1; //Wersja configu 1
 	
 	private List<String> blockedUsers      = null;
+	
 	private boolean isSessionStored        = false;
 	private String storedNick              = null;
 	private byte[] storedPassword          = null;
+	
+	private boolean debugOnChat            = false;
+	private boolean rollOnNewPost          = true;
 	
 	public Configuration()
 	{
@@ -69,5 +73,25 @@ public class Configuration implements Serializable
 	public void setSessionStored(boolean isSessionStored)
 	{
 		this.isSessionStored = isSessionStored;
+	}
+
+	public boolean isDebugOnChat()
+	{
+		return debugOnChat;
+	}
+
+	public void setDebugOnChat(boolean debugOnChat)
+	{
+		this.debugOnChat = debugOnChat;
+	}
+
+	public boolean isRollOnNewPost()
+	{
+		return rollOnNewPost;
+	}
+
+	public void setRollOnNewPost(boolean rollOnNewPost)
+	{
+		this.rollOnNewPost = rollOnNewPost;
 	}
 }
