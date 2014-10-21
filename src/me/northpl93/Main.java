@@ -40,6 +40,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		System.out.println("start "+VERSION);
+		initializeConfig();
 		switchPanel(PanelsEnum.LOADING_PANEL.getInstance()); //Ustawienie panelu na wczytywanie
         cookieHandler = new CookieManager();
         cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -49,8 +50,6 @@ public class Main
 		usersListener = new UsersListenThread();
 		cmdMngr = new CommandManager();
 		registerCommands();
-		
-		initializeConfig();
 		
 		if(config.isSessionStored())
 		{
@@ -73,7 +72,7 @@ public class Main
 	{
 		System.out.println(message);
 		
-		if(getConfig().isDebugOnChat())
+		if(getConfig() != null && getConfig().isDebugOnChat())
 		{
 			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[DEBUG] "+message);
 		}
