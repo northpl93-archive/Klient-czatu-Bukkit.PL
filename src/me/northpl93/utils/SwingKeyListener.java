@@ -22,7 +22,7 @@ public class SwingKeyListener implements KeyListener
 			
 			if(cp.wiadomoscDoWyslania.getText() == null || cp.wiadomoscDoWyslania.getText().equalsIgnoreCase(""))
 			{
-				JOptionPane.showMessageDialog(null, "Musisz wpisaæ wiadomoœæ!");
+				JOptionPane.showMessageDialog(null, "Musisz wpisaÄ‡ wiadomoÅ›Ä‡!");
 				return;
 			}
 			
