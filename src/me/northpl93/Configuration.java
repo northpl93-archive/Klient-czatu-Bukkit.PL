@@ -25,7 +25,7 @@ public class Configuration implements Serializable
 	}
 	
 	/**
-	 * Metoda która ustawi wartoœci na domyœlne
+	 * Metoda ktÃ³ra ustawi wartoÄ…ci na domyÅ›lne
 	 */
 	public void setDefaults()
 	{

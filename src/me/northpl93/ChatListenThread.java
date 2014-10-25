@@ -40,9 +40,9 @@ public class ChatListenThread extends Thread
 			
 			lol = PostExecute.excutePost("http://bukkit.pl/index.php/taigachat/list.json", rawData);
 			
-			if(lol == null) //B³¹d z pobieraniem zawartoœci
+			if(lol == null) //BÅ‚Ä…d z pobieraniem zawartoÅ›ci
 			{
-				Main.debug("Nie mo¿na pobraæ nowych wiadomoœci: Wyst¹pi³ problem z po³¹czeniem. W¹tek zostanie zatrzymany...\n");
+				Main.debug("Nie moÅ¼na pobraÅ¼ nowych wiadomoÅ›ci: WystÄ…piÅ‚ problem z poÅ‚Ä…czeniem. WÄ…tek zostanie zatrzymany...\n");
 				this.stop();
 				return;
 			}
@@ -76,7 +76,7 @@ public class ChatListenThread extends Thread
 				{
 					if(!Main.getLoggedUserName().equalsIgnoreCase(el.text()) && !Main.getMainWindow().isActive())
 					{
-						new NotificationWindow("Czat bukkit.pl", "Nowa wiadomoœæ od u¿ytkownika "+el.text(), NotificationWindow.Icons.CHAT.getIco());
+						new NotificationWindow("Czat bukkit.pl", "Nowa wiadomoÅ›Ä‡ od uÅ¼ytkownika "+el.text(), NotificationWindow.Icons.CHAT.getIco());
 					}
 					
 					sb.append(el.text());

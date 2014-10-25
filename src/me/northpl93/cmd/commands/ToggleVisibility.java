@@ -16,7 +16,7 @@ public class ToggleVisibility implements CommandExecutor
 	@Override
 	public String getCommandInfo()
 	{
-		return "Zmienia twoj¹ widocznoœæ";
+		return "Zmienia twojÄ… widocznoÅ›Ä‡";
 	}
 
 	@Override
@@ -40,19 +40,19 @@ public class ToggleVisibility implements CommandExecutor
 	{
 		if(args.length == 0)
 		{
-			cmdMngr.sendMessage("U¿ycie: /togglevisibility true/false");
+			cmdMngr.sendMessage("UÅ¼ycie: /togglevisibility true/false");
 			return;
 		}
 		
 		if(args.length > 1)
 		{
-			cmdMngr.sendMessage("U¿ycie: /togglevisibility true/false");
+			cmdMngr.sendMessage("UÅ¼ycie: /togglevisibility true/false");
 			return;
 		}
 		
 		if(Main.getLoggedUserName().isEmpty() || ((ChatListenThread)Main.chatListener).getLoggedUser().isEmpty())
 		{
-			cmdMngr.sendMessage("Musisz byæ zalogowany, aby u¿yæ tej komendy");
+			cmdMngr.sendMessage("Musisz byÄ‡ zalogowany, aby uÅ¼yÄ‡ tej komendy");
 			return;
 		}
 		
@@ -66,7 +66,7 @@ public class ToggleVisibility implements CommandExecutor
 		}
 		else
 		{
-			cmdMngr.sendMessage("U¿ycie: /togglevisibility true/false");
+			cmdMngr.sendMessage("UÅ¼ycie: /togglevisibility true/false");
 			return;
 		}
 	}

@@ -32,7 +32,7 @@ public class SessionRestorePanel extends JPanel
 		JButton btnTak = new JButton("Tak");
 		btnTak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.debug("User chce przwróciæ sesjê...");
+				Main.debug("User chce przwrÃ³ciÄ‡ sesjÄ™...");
 				Main.getConfig().setSessionStored(true);
 				if(Main.chatListener == null)
 				{
@@ -40,8 +40,8 @@ public class SessionRestorePanel extends JPanel
 				}
 				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.getConfig().getStoredNick(), Main.getConfig().getStoredPassword()));
 				Main.setLoggedUserName(Main.getConfig().getStoredNick());
-				Main.debug("Przywrócony nick: "+Main.getConfig().getStoredNick());
-				Main.debug("Przywrocono sesje!");
+				Main.debug("PrzywrÃ³cony nick: "+Main.getConfig().getStoredNick());
+				Main.debug("PrzywrÃ³cono sesje!");
 				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
 				if(Main.usersListener == null)
 				{
@@ -59,7 +59,7 @@ public class SessionRestorePanel extends JPanel
 		JButton btnNie = new JButton("Nie");
 		btnNie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.debug("User nie chcia³ przywracaæ sesji.");
+				Main.debug("User nie chciaÅ‚ przywracaÄ‡ sesji.");
         		Main.getConfig().setStoredNick(null);
         		Main.getConfig().setStoredPassword("");
         		Main.getConfig().setSessionStored(false);

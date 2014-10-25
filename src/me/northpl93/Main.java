@@ -63,9 +63,9 @@ public class Main
 	}
 	
 	/**
-	 * Wyœwietla wiadomoœæ na konsoli (zawsze) i w oknie czatu (tylko gdy w³¹czone debugowanie na czat)
+	 * Wyï¿½wietla wiadomoï¿½ï¿½ na konsoli (zawsze) i w oknie czatu (tylko gdy wï¿½ï¿½czone debugowanie na czat)
 	 * 
-	 * @param message Wiadomoœæ do wyœwietlenia
+	 * @param message Wiadomoï¿½ï¿½ do wyï¿½wietlenia
 	 */
 	public static void debug(String message)
 	{
@@ -125,7 +125,7 @@ public class Main
 		File wk = new File(workingDirectory);
 		if(!wk.exists())
 		{
-			debug("working directory nie istnieje. Tworzê...");
+			debug("working directory nie istnieje. Tworzï¿½...");
 			wk.mkdirs();
 		}
 		
@@ -134,7 +134,7 @@ public class Main
 		
 		if(!configFile.isDirectory() && !configFile.exists())
 		{
-			debug("Plik configu nie istnieje. Tworzê nowy...");
+			debug("Plik configu nie istnieje. Tworzï¿½ nowy...");
 			try
 			{
 				configFile.createNewFile();
@@ -154,8 +154,8 @@ public class Main
 		}
 		catch (Exception e)
 		{
-			debug("B³¹d podczas wczytywania pliku konfiguracyjnego (pierwsze odpalenie programu?)");
-			debug("Za³adowany zostanie domyœlny config..");
+			debug("BÅ‚Ä…d podczas wczytywania pliku konfiguracyjnego (pierwsze odpalenie programu?)");
+			debug("ZaÅ‚adowany zostanie domyÅ›lny config..");
 			
 			config = new Configuration();
 			config.setDefaults();

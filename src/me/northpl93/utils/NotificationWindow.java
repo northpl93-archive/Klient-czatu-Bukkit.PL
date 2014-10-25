@@ -39,7 +39,7 @@ public class NotificationWindow extends JFrame
 		constraints.insets = new Insets(5, 5, 5, 5);
 		constraints.fill = GridBagConstraints.BOTH;
 		JLabel headingLabel = new JLabel(title);
-		headingLabel.setIcon(ico); // --- use image icon you want to be as heading image.
+		headingLabel.setIcon(ico);
 		headingLabel.setOpaque(false);
 		add(headingLabel, constraints);
 		constraints.gridx++;

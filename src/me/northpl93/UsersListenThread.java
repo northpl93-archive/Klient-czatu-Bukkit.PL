@@ -44,7 +44,7 @@ public class UsersListenThread extends Thread
 			
 			if(content == null)
 			{
-				Main.debug("Nie moøna pobraÊ listy uøytkownikÛw: Wystπpi≥ problem z po≥πczeniem. Wπtek zostanie zatrzymany...\n");
+				Main.debug("Nie mo≈ºna pobraƒá listy u≈ºytkownik√≥w: WystƒÖpi≈Ç problem z po≈ÇƒÖczeniem. WƒÖtek zostanie zatrzymany...\n");
 				this.stop();
 				return;
 			}
@@ -92,9 +92,9 @@ public class UsersListenThread extends Thread
 					{
 						if(!Main.getMainWindow().isActive())
 						{
-							new NotificationWindow("Czat bukkit.pl", "Uøytkownik "+s+" opuúci≥ czat!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow("Czat bukkit.pl", "U≈ºytkownik "+s+" opu≈õci≈Ç czat!", NotificationWindow.Icons.USER.getIco());
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] - Uøytkownik "+s+" opuúci≥ czat\n");
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] - U≈ºytkownik "+s+" opu≈õci≈Ç czat\n");
 					}
 				}
 				
@@ -104,9 +104,9 @@ public class UsersListenThread extends Thread
 					{
 						if(!Main.getMainWindow().isActive())
 						{
-							new NotificationWindow("Czat bukkit.pl", "Uøytkownik "+s+" do≥πczy≥ do czatu!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow("Czat bukkit.pl", "U≈ºytkownik "+s+" do≈ÇƒÖczy≈Ç do czatu!", NotificationWindow.Icons.USER.getIco());
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] + Uøytkownik "+s+" do≥πczy≥ do czatu\n");
+						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] + U≈ºytkownik "+s+" do≈ÇƒÖczy≈Ç do czatu\n");
 					}
 				}
 			}

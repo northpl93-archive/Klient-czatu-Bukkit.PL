@@ -13,7 +13,7 @@ public class Help implements CommandExecutor
 	@Override
 	public String getCommandInfo()
 	{
-		return "Wyœwietla listê komend";
+		return "WyÅ›wietla listÄ™ komend";
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class Help implements CommandExecutor
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("* /");
-			sb.append(exe.getCommandTemplates().get(0)); //Jako g³ówna komenda jest wyœwietlana pierwsza opcja z listy dostêpnych
+			sb.append(exe.getCommandTemplates().get(0)); //Jako gÅ‚Ã³wna komenda jest wyÅ›wietlana pierwsza opcja z listy dostÄ™pnych
 			sb.append(" - ");
 			sb.append(exe.getCommandInfo());
 			cmdMngr.sendMessage(sb.toString());

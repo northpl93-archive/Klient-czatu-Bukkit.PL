@@ -21,7 +21,7 @@ public class CommandManager
 		exec.init(this);
 	}
 	
-	public void handleCommand(String fullText) //Tekst wpisany na czat bez slasha na pocz¹tku
+	public void handleCommand(String fullText) //Tekst wpisany na czat bez slasha na poczï¿½tku
 	{
 		String[] splitted = fullText.split(" ");
 		
@@ -39,7 +39,7 @@ public class CommandManager
 			}
 		}
 		((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance())
-		.addMessage("Nie znaleziono komendy! Wpisz /help aby uzyskaæ listê komend");
+		.addMessage("Nie znaleziono komendy! Wpisz /help aby uzyskaÄ‡ listÄ™ komend");
 	}
 	
 	public ArrayList<CommandExecutor> getCommands()

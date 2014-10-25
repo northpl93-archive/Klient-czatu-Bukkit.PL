@@ -45,7 +45,7 @@ public class ChatPanel extends JPanel  {
 			public void actionPerformed(ActionEvent arg0) {
 				if(wiadomoscDoWyslania.getText() == null || wiadomoscDoWyslania.getText().equalsIgnoreCase(""))
 				{
-					JOptionPane.showMessageDialog(null, "Musisz wpisaæ wiadomoœæ!");
+					JOptionPane.showMessageDialog(null, "Musisz wpisaÄ‡ wiadomoÅ›Ä‡!");
 					return;
 				}
 				
@@ -109,7 +109,7 @@ public class ChatPanel extends JPanel  {
 	}
 	
 	/**
-	 * Przewija czat na dó³
+	 * Przewija czat na dÃ³Å‚
 	 */
 	public void scrollToDown()
 	{

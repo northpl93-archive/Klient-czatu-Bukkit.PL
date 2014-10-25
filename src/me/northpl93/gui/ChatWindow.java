@@ -28,7 +28,7 @@ public class ChatWindow extends JFrame
             public void windowClosing(WindowEvent e)
             {
             	Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
-            	Main.debug("Otrzymano polecenie zamkniêcia programu... Sprawdzanie czy nie ma klucza sesji...");
+            	Main.debug("Otrzymano polecenie zamkniÄ™cia programu... Sprawdzanie czy nie ma klucza sesji...");
                 if(Main.chatListener != null)
                 {
                 	if(((ChatListenThread)Main.chatListener).getLoggedUser() != null)
@@ -38,13 +38,13 @@ public class ChatWindow extends JFrame
 	                		Main.debug("Znaleziono aktywny klucz sesji.");
 	                		if(Main.getConfig().isSessionStored())
 	                		{
-	                			Main.debug("W³¹czono opcjê zapisywania sesji.");
+	                			Main.debug("WÅ‚Ä…czono opcjÄ™ zapisywania sesji.");
 	                			XenForoUtils.logout(((ChatListenThread)Main.chatListener).getLoggedUser());
 	                			Main.saveConfig();
 	                			e.getWindow().dispose();
 	                			return;
 	                		}
-	                		Main.debug("Zapamiêtywanie sesji nie jest w³¹czone. Wysy³anie polecenia wylogowania...");
+	                		Main.debug("ZapamiÄ™tywanie sesji nie jest wÅ‚aczone. WysyÅ‚anie polecenia wylogowania...");
 	                		Main.getConfig().setStoredNick("");
 	                		Main.getConfig().setStoredPassword("");
 	                		Main.getConfig().setSessionStored(false);
@@ -55,7 +55,7 @@ public class ChatWindow extends JFrame
 	                	}
                 	}
                 }
-                Main.debug("Nie znaleziono klucza sesji... Nie wys³ano polecenia wylogowania, ani nie zapisano sesji do configu");
+                Main.debug("Nie znaleziono klucza sesji... Nie wysï¿½ano polecenia wylogowania, ani nie zapisano sesji do configu");
                 Main.saveConfig();
                 e.getWindow().dispose();
             }

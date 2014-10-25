@@ -56,7 +56,7 @@ public class WelcomePanel extends JPanel {
 		textField.setColumns(10);
 		textField.addKeyListener(lpskl);
 		
-		textField_1 = new JPasswordField(); //Pole na has³o
+		textField_1 = new JPasswordField(); //Pole na hasï¿½o
 		textField_1.setBounds(93, 118, 124, 20);
 		add(textField_1);
 		textField_1.setColumns(10);
@@ -108,7 +108,7 @@ public class WelcomePanel extends JPanel {
 		chckbxRollOnNewPost.setSelected(Main.getConfig().isRollOnNewPost());
 	}
 	
-	public void loginStuff() //Wywo³ywane przy logowaniu
+	public void loginStuff() //Wywoï¿½ywane przy logowaniu
 	{
 		Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
 		Main.getConfig().setDebugOnChat(chckbxChatDebug.isSelected());
@@ -117,7 +117,7 @@ public class WelcomePanel extends JPanel {
 		
 		if(textField.getText() == null || textField_1.getText() == null || textField.getText().equalsIgnoreCase("") || textField_1.getText().equalsIgnoreCase(""))
 		{
-			JOptionPane.showMessageDialog(null, "Któreœ z podanych pól pozostawi³eœ puste! Nie bêdziesz móg³ pisaæ wiadomoœci :C");
+			JOptionPane.showMessageDialog(null, "KtÃ³reÅ› z podanych pÃ³l pozostawiÅ‚eÅ› puste! Nie bÄ™dziesz mÃ³gÅ‚ pisaÄ‡ wiadomoÅ›ci :C");
 			
 			Main.getConfig().setSessionStored(false); //Zeby nie probowalo przy kolejnym starcie wczytywac pustej sesji...
 			Main.getConfig().setStoredNick("");
@@ -142,7 +142,7 @@ public class WelcomePanel extends JPanel {
 		}
 		
 		((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(textField.getText(), textField_1.getText()));
-		Main.setLoggedUserName(textField.getText()); //Zapisanie nazwy zalogowanego u¿ytkownika
+		Main.setLoggedUserName(textField.getText()); //Zapisanie nazwy zalogowanego uÅ¼ytkownika
 		Main.getConfig().setStoredNick(textField.getText());
 		Main.getConfig().setStoredPassword(textField_1.getText());
 		Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa

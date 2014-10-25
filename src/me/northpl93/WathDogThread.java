@@ -17,7 +17,7 @@ public class WathDogThread extends Thread
 				((ChatListenThread)Main.chatListener).setLoggedUser(xfTokenCache);
 				((ChatListenThread)Main.chatListener).setLatestMessage(lastMsgCache);
 				Main.chatListener.start();
-				Main.debug("W¹tek odœwie¿ania wiadomoœci zosta³ uruchomiony ponownie");
+				Main.debug("WÄ…tek odÅ›wieÅ¼ania wiadomoÅ›ci zostaÅ‚ uruchomiony ponownie");
 			}
 			else
 			{
@@ -31,7 +31,7 @@ public class WathDogThread extends Thread
 				Main.usersListener = new UsersListenThread();
 				((UsersListenThread)Main.usersListener).cacheXfToken = xfTokenCache;
 				Main.usersListener.start();
-				Main.debug("W¹tek odœwie¿ania listy userów zosta³ uruchomiony ponownie");
+				Main.debug("WÄ…tek odÅ›wieÅ¼ania listy userÃ³w zostaÅ‚ uruchomiony ponownie");
 			}
 			
 			try
