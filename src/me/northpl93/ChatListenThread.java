@@ -42,7 +42,7 @@ public class ChatListenThread extends Thread
 			
 			if(lol == null) //Błąd z pobieraniem zawartości
 			{
-				Main.debug("Nie można pobraż nowych wiadomości: Wystąpił problem z połączeniem. Wątek zostanie zatrzymany...\n");
+				Main.debug("Nie można pobrać nowych wiadomości: Wystąpił problem z połączeniem. Wątek zostanie zatrzymany...\n");
 				this.stop();
 				return;
 			}

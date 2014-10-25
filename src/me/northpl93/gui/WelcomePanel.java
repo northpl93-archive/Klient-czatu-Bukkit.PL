@@ -108,7 +108,7 @@ public class WelcomePanel extends JPanel {
 		chckbxRollOnNewPost.setSelected(Main.getConfig().isRollOnNewPost());
 	}
 	
-	public void loginStuff() //Wywo�ywane przy logowaniu
+	public void loginStuff() //Wywoływane przy logowaniu
 	{
 		Main.switchPanel(PanelsEnum.LOADING_PANEL.getInstance());
 		Main.getConfig().setDebugOnChat(chckbxChatDebug.isSelected());
