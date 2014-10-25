@@ -29,7 +29,6 @@ public class Main
 	private static CommandManager cmdMngr        = null;
 	private static CookieManager cookieHandler   = null;
 	private static Configuration config          = null;
-	
 	private static File configFile               = null;
 	
 	private static String loggedUserName         = "";

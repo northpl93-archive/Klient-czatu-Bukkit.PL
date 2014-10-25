@@ -7,6 +7,7 @@
   <description>Aplikacja umożliwiająca romowę na czacie bukkit.pl bez uruchamiania przeglądarki</description>
   <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 <mainclass>me.northpl93.Main</mainclass>
   </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -19,6 +20,7 @@
       </resource>
     </resources>
     <plugins>
+	  <!-- Kompilowanie -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
@@ -27,9 +29,10 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+	  <!-- /Kompilowanie -->
 	  
+	  <!-- Budowanie jara ktorego da sie odpalic -->
 	  <plugin>
-      <!-- Build an executable JAR -->
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
       <version>2.4</version>
@@ -37,12 +40,14 @@
       <archive>
         <manifest>
           <addClasspath>true</addClasspath>
-          <mainClass>me.northpl93.Main</mainClass>
+          <mainClass>${mainclass}</mainClass>
         </manifest>
       </archive>
     </configuration>
     </plugin>
+	<!-- /Budowanie jara ktorego da sie odpalic -->
 	
+	<!-- Dodawanie do jara dodatkow -->
     <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-shade-plugin</artifactId>
@@ -58,6 +63,37 @@
 			</execution>
 		</executions>
 	</plugin>
+	<!-- /Dodawanie do jara dodatkow -->
+	
+	<!-- Tworzenie pliku exe -->
+	<plugin>
+		<groupId>com.akathist.maven.plugins.launch4j</groupId>
+		<artifactId>launch4j-maven-plugin</artifactId>
+		<version>1.5.2</version>
+		<executions>
+			<execution>
+				<configuration>
+					<headerType>gui</headerType>
+					<stayAlive>false</stayAlive>
+					<jar>${project.build.directory}/${project.artifactId}-${project.version}.jar</jar>
+					<outfile>${project.build.directory}/${project.artifactId}-${project.version}.exe</outfile>
+					<classPath>
+						<mainClass>${mainclass}</mainClass>
+						<addDependencies>false</addDependencies>
+						<preCp>anything</preCp>
+					</classPath>
+					<jre>
+						<minVersion>1.7.0</minVersion>
+					</jre>
+				</configuration>
+				<goals>
+					<goal>launch4j</goal>
+				</goals>
+				<phase>package</phase>
+			</execution>
+		</executions>
+	</plugin>
+	<!-- /Tworzenie pliku exe -->
 	
     </plugins>
   </build>
