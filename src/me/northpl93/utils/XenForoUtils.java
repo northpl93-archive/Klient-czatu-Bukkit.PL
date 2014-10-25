@@ -38,7 +38,7 @@ public class XenForoUtils
 		String response = PostExecute.excutePost("http://bukkit.pl/taigachat/post.json", rawData);
 		if(response.contains("Security error occurred.") || response.contains("You do not have permission to post messages."))
 		{
-			JOptionPane.showMessageDialog(null, "Wyst¹pi³ problem podczas wysy³ania wiadomoœci. Prawdopodobnie siê nie zalogowa³eœ (lub poda³eœ z³e dane)");
+			JOptionPane.showMessageDialog(null, "WystÄ…piÅ‚ problem podczas wysyÅ‚ania wiadomoÅ›ci. Prawdopodobnie siÄ™ nie zalogowaÅ‚eÅ› (lub podaÅ‚eÅ› zÅ‚e dane)");
 		}
 		Main.debug("XenForoUtils -> sendMessage -> response: "+response);
 	}
