@@ -21,6 +21,7 @@ public class ChatWindow extends JFrame
         setVisible(true);
         setSize(650, 350);
         setResizable(false);
+        setLocationRelativeTo(null);
         
         addWindowListener(new WindowAdapter()
         {
