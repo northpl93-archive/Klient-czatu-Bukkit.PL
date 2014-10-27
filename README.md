@@ -1,1 +1,1 @@
-Klient czatu bukkit.pl
+Klient czatu bukkit.pl by northpl
