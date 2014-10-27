@@ -40,7 +40,7 @@ public class Help implements CommandExecutor
 		{
 			StringBuilder sb = new StringBuilder();
 			
-			sb.append("* /");
+			sb.append("» /");
 			sb.append(exe.getCommandTemplates().get(0)); //Jako główna komenda jest wyświetlana pierwsza opcja z listy dostępnych
 			sb.append(" - ");
 			sb.append(exe.getCommandInfo());
