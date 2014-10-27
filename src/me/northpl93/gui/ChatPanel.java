@@ -113,7 +113,7 @@ public class ChatPanel extends JPanel  {
 	 */
 	public void scrollToDown()
 	{
-        vertical.setValue( vertical.getMaximum() );
+        vertical.setValue(vertical.getMaximum());
 	}
 	
 	public void addMessage(String msg)

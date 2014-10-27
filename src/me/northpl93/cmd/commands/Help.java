@@ -35,15 +35,16 @@ public class Help implements CommandExecutor
 	@Override
 	public void execute(String[] args)
 	{
-		cmdMngr.sendMessage("Lista wszystkich komend: ");
+		cmdMngr.sendMessage("Lista wszystkich komend: \n");
 		for(CommandExecutor exe : cmdMngr.getCommands())
 		{
 			StringBuilder sb = new StringBuilder();
 			
-			sb.append("» /");
+			sb.append("» ");
 			sb.append(exe.getCommandTemplates().get(0)); //Jako główna komenda jest wyświetlana pierwsza opcja z listy dostępnych
 			sb.append(" - ");
 			sb.append(exe.getCommandInfo());
+			sb.append("\n");
 			cmdMngr.sendMessage(sb.toString());
 			sb = null;
 		}
