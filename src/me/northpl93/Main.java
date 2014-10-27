@@ -19,12 +19,14 @@ import me.northpl93.cmd.commands.*;
 import me.northpl93.gui.ChatPanel;
 import me.northpl93.gui.ChatWindow;
 import me.northpl93.gui.PanelsEnum;
+import me.northpl93.utils.TrayManager;
 
 public class Main
 {
 	public static Thread chatListener            = null;
 	public static Thread usersListener           = null;
 	public static Thread wathDogThread           = null;
+	private static TrayManager trayManager       = null;
 	private static JFrame window                 = null;
 	private static CommandManager cmdMngr        = null;
 	private static CookieManager cookieHandler   = null;
@@ -44,6 +46,10 @@ public class Main
         cookieHandler = new CookieManager();
         cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         CookieHandler.setDefault(cookieHandler);
+        
+		trayManager = new TrayManager();
+		trayManager.show();
+		trayManager.showMessage("teewes");
 		
 		chatListener = new ChatListenThread();
 		usersListener = new UsersListenThread();
@@ -206,5 +212,10 @@ public class Main
 	public static String getVersion()
 	{
 		return VERSION;
+	}
+	
+	public static TrayManager getTray()
+	{
+		return trayManager;
 	}
 }
