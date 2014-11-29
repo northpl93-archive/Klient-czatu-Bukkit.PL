@@ -90,9 +90,13 @@ public class UsersListenThread extends Thread
 				{
 					if(!newUsers.contains(s))
 					{
-						if(!Main.getMainWindow().isActive())
+						if(Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
 						{
-							new NotificationWindow("Czat bukkit.pl", "Użytkownik "+s+" opuścił czat!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow(Main.getMsgHeader(), "Użytkownik "+s+" opuścił czat!", NotificationWindow.Icons.USER.getIco());
+						}
+						else if(Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						{
+							Main.getTray().showMessage("Użytkownik "+s+" opuścił czat!");
 						}
 						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] - Użytkownik "+s+" opuścił czat\n");
 					}
@@ -102,9 +106,13 @@ public class UsersListenThread extends Thread
 				{
 					if(!latestUsers.contains(s))
 					{
-						if(!Main.getMainWindow().isActive())
+						if(Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
 						{
-							new NotificationWindow("Czat bukkit.pl", "Użytkownik "+s+" dołączył do czatu!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow(Main.getMsgHeader(), "Użytkownik "+s+" dołączył do czatu!", NotificationWindow.Icons.USER.getIco());
+						}
+						else if(Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						{
+							Main.getTray().showMessage("Użytkownik "+s+" dołączył do czatu!");
 						}
 						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] + Użytkownik "+s+" dołączył do czatu\n");
 					}

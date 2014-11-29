@@ -1,4 +1,4 @@
-package me.northpl93.gui;
+package me.northpl93.gui.config;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +18,7 @@ public class ConfigurationWindow extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 	}
 
 }

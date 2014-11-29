@@ -16,6 +16,7 @@
         <directory>src</directory>
         <excludes>
           <exclude>**/*.java</exclude>
+		  <exclude>**/*.jar</exclude>
         </excludes>
       </resource>
     </resources>
@@ -114,5 +115,6 @@
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
     </dependency>
+	
   </dependencies>
 </project>

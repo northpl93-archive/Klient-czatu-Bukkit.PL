@@ -43,6 +43,14 @@ public class ChatListenThread extends Thread
 			if(lol == null) //Błąd z pobieraniem zawartości
 			{
 				Main.debug("Nie można pobrać nowych wiadomości: Wystąpił problem z połączeniem. Wątek zostanie zatrzymany...\n");
+				if(Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && !Main.getMainWindow().isActive())
+				{
+					new NotificationWindow(Main.getMsgHeader(), "Wystąpił problem podczas pobierania wiadomości. Postaramy się to naprawić!", NotificationWindow.Icons.USER.getIco());
+				}
+				else if(Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && !Main.getMainWindow().isActive())
+				{
+					Main.getTray().showMessage("Wystąpił problem podczas pobierania wiadomości. Postaramy się to naprawić!");
+				}
 				this.stop();
 				return;
 			}
@@ -76,7 +84,16 @@ public class ChatListenThread extends Thread
 				{
 					if(!Main.getLoggedUserName().equalsIgnoreCase(el.text()) && !Main.getMainWindow().isActive())
 					{
-						new NotificationWindow("Czat bukkit.pl", "Nowa wiadomość od użytkownika "+el.text(), NotificationWindow.Icons.CHAT.getIco());
+						
+					}
+					
+					if(latestMessage != 0 && !Main.getLoggedUserName().equalsIgnoreCase(el.text()) && Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && Main.getConfig().isNotification_newPost() && !Main.getMainWindow().isActive())
+					{
+						new NotificationWindow(Main.getMsgHeader(), "Nowa wiadomość od użytkownika "+el.text(), NotificationWindow.Icons.CHAT.getIco());
+					}
+					else if(latestMessage != 0 && Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && Main.getConfig().isNotification_newPost() && !Main.getMainWindow().isActive())
+					{
+						Main.getTray().showMessage("Nowa wiadomość od użytkownika "+el.text());
 					}
 					
 					sb.append(el.text());

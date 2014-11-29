@@ -57,7 +57,8 @@ public class TrayManager
 		try
 		{
 			tray.add(trayIcon);
-		} catch (AWTException e)
+		}
+		catch (AWTException e)
 		{
 			Main.debug("TrayIcon could not be added.");
 		}
@@ -75,7 +76,7 @@ public class TrayManager
 			@Override
 			public void run()
 			{
-				trayIcon.displayMessage("Klient czatu Bukkit.PL", message, TrayIcon.MessageType.INFO);
+				trayIcon.displayMessage(Main.getMsgHeader(), message, TrayIcon.MessageType.INFO);
 			}
 		});
 	}

@@ -36,6 +36,7 @@ public class Main
 	private static String loggedUserName         = "";
 	
 	private static final String VERSION          = "1.4.0 INDEV";
+	private static final String msgHeader        = "";
 	
 	
 	public static void main(String[] args)
@@ -49,7 +50,6 @@ public class Main
         
 		trayManager = new TrayManager();
 		trayManager.show();
-		trayManager.showMessage("teewes");
 		
 		chatListener = new ChatListenThread();
 		usersListener = new UsersListenThread();
@@ -69,9 +69,9 @@ public class Main
 	}
 	
 	/**
-	 * Wy�wietla wiadomo�� na konsoli (zawsze) i w oknie czatu (tylko gdy w��czone debugowanie na czat)
+	 * Wyświetla wiadomośc na konsoli (zawsze) i w oknie czatu (tylko gdy włączone debugowanie na czat)
 	 * 
-	 * @param message Wiadomo�� do wy�wietlenia
+	 * @param message Wiadomość do wyświetlenia
 	 */
 	public static void debug(String message)
 	{
@@ -114,6 +114,7 @@ public class Main
 	public static void initializeConfig()
 	{
 		String workingDirectory;
+		String s = System.getProperty("file.separator");
 		String OS = (System.getProperty("os.name")).toUpperCase();
 		if (OS.contains("WIN"))
 		{
@@ -122,25 +123,24 @@ public class Main
 		else
 		{
 		    workingDirectory = System.getProperty("user.home");
-		    workingDirectory += "/Library/Application Support";
 		}
-		workingDirectory += "/bukkitpl-chat-northpl";
+		workingDirectory += s+".bukkitpl-chat-northpl";
 		
 		debug("workingDirectory=="+workingDirectory);
 		
 		File wk = new File(workingDirectory);
 		if(!wk.exists())
 		{
-			debug("working directory nie istnieje. Tworz�...");
+			debug("working directory nie istnieje. Tworzę...");
 			wk.mkdirs();
 		}
 		
-		configFile = new File(workingDirectory+="/config.dat");
+		configFile = new File(workingDirectory+=s+"config.dat");
 		debug("configFile=="+configFile);
 		
 		if(!configFile.isDirectory() && !configFile.exists())
 		{
-			debug("Plik configu nie istnieje. Tworz� nowy...");
+			debug("Plik configu nie istnieje. Tworzę nowy...");
 			try
 			{
 				configFile.createNewFile();
@@ -217,5 +217,10 @@ public class Main
 	public static TrayManager getTray()
 	{
 		return trayManager;
+	}
+	
+	public static String getMsgHeader()
+	{
+		return msgHeader;
 	}
 }

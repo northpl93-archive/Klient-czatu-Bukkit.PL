@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
@@ -17,11 +19,14 @@ import javax.swing.WindowConstants;
 
 public class NotificationWindow extends JFrame
 {
-	private static final long serialVersionUID = 1925248663422133218L;
+	private static final long serialVersionUID      = 1925248663422133218L;
+	
+	private static List<NotificationWindow> notWindows = new ArrayList<NotificationWindow>(1);
 
 	public NotificationWindow(String title, String message, Icon ico)
 	{
 		super(title);
+		notWindows.add(this);
 		setSize(300,125);
 		setLayout(new GridBagLayout());
 		setUndecorated(true);
@@ -80,6 +85,7 @@ public class NotificationWindow extends JFrame
 				{
 					Thread.sleep(5000);
 					dispose();
+					notWindows.remove(this);
 				}
 				catch (InterruptedException e)
 				{
@@ -87,6 +93,17 @@ public class NotificationWindow extends JFrame
 				}
 			};
 		}.start();
+	}
+	
+	public static List<NotificationWindow> getNotificationWindows()
+	{
+		return notWindows;
+	}
+	
+	public void removeThisWindow()
+	{
+		this.dispose();
+		notWindows.remove(this);
 	}
 	
 	public enum Icons

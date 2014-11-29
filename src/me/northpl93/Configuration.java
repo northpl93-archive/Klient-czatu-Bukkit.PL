@@ -19,13 +19,23 @@ public class Configuration implements Serializable
 	private boolean debugOnChat            = false;
 	private boolean rollOnNewPost          = true;
 	
+	private NotificationType notType       = NotificationType.OFF; //Typ powiadomien. 0-wylaczone 1-okienko 2-dymek
+	private boolean notification_newPost   = true; //Info o nowych postach
+	private boolean notification_userAction= true; //Wyjscie lub wejscie usera z czatu
+	
+	
+	public enum NotificationType
+	{
+		OFF(), WINDOW(), BALLON();
+	}
+	
 	public Configuration()
 	{
 		setDefaults();
 	}
 	
 	/**
-	 * Metoda która ustawi wartoąci na domyślne
+	 * Metoda która ustawi wartości na domyślne
 	 */
 	public void setDefaults()
 	{
@@ -33,6 +43,7 @@ public class Configuration implements Serializable
 		blockedUsers = new ArrayList<String>();
 		storedNick = "";
 		storedPassword = new byte[0];
+		setNotificationType(NotificationType.OFF);
 	}
 	
 	public List<String> getBlockedUsers()
@@ -93,5 +104,35 @@ public class Configuration implements Serializable
 	public void setRollOnNewPost(boolean rollOnNewPost)
 	{
 		this.rollOnNewPost = rollOnNewPost;
+	}
+
+	public NotificationType getNotificationType()
+	{
+		return notType;
+	}
+
+	public void setNotificationType(NotificationType notificationType)
+	{
+		this.notType = notificationType;
+	}
+
+	public boolean isNotification_newPost()
+	{
+		return notification_newPost;
+	}
+
+	public void setNotification_newPost(boolean notification_newPost)
+	{
+		this.notification_newPost = notification_newPost;
+	}
+
+	public boolean isNotification_userAction()
+	{
+		return notification_userAction;
+	}
+
+	public void setNotification_userAction(boolean notification_userAction)
+	{
+		this.notification_userAction = notification_userAction;
 	}
 }
