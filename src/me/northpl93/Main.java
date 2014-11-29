@@ -2,10 +2,12 @@ package me.northpl93;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -13,6 +15,8 @@ import java.net.CookiePolicy;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import org.apache.commons.lang3.time.FastDateFormat;
 
 import me.northpl93.cmd.CommandManager;
 import me.northpl93.cmd.commands.*;
@@ -32,6 +36,7 @@ public class Main
 	private static CookieManager cookieHandler   = null;
 	private static Configuration config          = null;
 	private static File configFile               = null;
+	private static File workDirectory            = null;
 	
 	private static String loggedUserName         = "";
 	
@@ -43,6 +48,7 @@ public class Main
 	{
 		System.out.println("start "+VERSION);
 		initializeConfig();
+		setupLog();
 		switchPanel(PanelsEnum.LOADING_PANEL.getInstance()); //Ustawienie panelu na wczytywanie
         cookieHandler = new CookieManager();
         cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -128,11 +134,11 @@ public class Main
 		
 		debug("workingDirectory=="+workingDirectory);
 		
-		File wk = new File(workingDirectory);
-		if(!wk.exists())
+		workDirectory = new File(workingDirectory);
+		if(!workDirectory.exists())
 		{
 			debug("working directory nie istnieje. Tworzę...");
-			wk.mkdirs();
+			workDirectory.mkdirs();
 		}
 		
 		configFile = new File(workingDirectory+=s+"config.dat");
@@ -182,6 +188,36 @@ public class Main
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private static void setupLog()
+	{
+		File logFile = new File(workDirectory.getPath()+System.getProperty("file.separator")+"logs"+System.getProperty("file.separator")+FastDateFormat.getInstance("dd-MM-yyyy--HH-mm-ss").format(System.currentTimeMillis( ))+".txt");
+		new File(logFile.getParent()).mkdirs();
+		if(!logFile.exists())
+		{
+			try
+			{
+				logFile.createNewFile();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Log file located at: "+logFile.getAbsolutePath());
+		System.out.println("Binding out stream to file...");
+		PrintStream out = null;
+		try
+		{
+			out = new PrintStream(new FileOutputStream(logFile));
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		System.setOut(out);
+		System.out.println("Log binded to file");
 	}
 	
 	public static JFrame getMainWindow()

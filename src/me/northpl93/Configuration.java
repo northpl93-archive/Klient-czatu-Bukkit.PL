@@ -19,7 +19,7 @@ public class Configuration implements Serializable
 	private boolean debugOnChat            = false;
 	private boolean rollOnNewPost          = true;
 	
-	private NotificationType notType       = NotificationType.OFF; //Typ powiadomien. 0-wylaczone 1-okienko 2-dymek
+	private NotificationType notType       = NotificationType.WINDOW;
 	private boolean notification_newPost   = true; //Info o nowych postach
 	private boolean notification_userAction= true; //Wyjscie lub wejscie usera z czatu
 	
@@ -43,7 +43,7 @@ public class Configuration implements Serializable
 		blockedUsers = new ArrayList<String>();
 		storedNick = "";
 		storedPassword = new byte[0];
-		setNotificationType(NotificationType.OFF);
+		setNotificationType(NotificationType.WINDOW);
 	}
 	
 	public List<String> getBlockedUsers()

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src" />
-	<classpathentry kind="con"
-		path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7" />
-	<classpathentry kind="lib"
-		path="C:/Users/Michał/Java Libs/gson-2.2.4.jar" />
-	<classpathentry kind="lib"
-		path="C:/Users/Michał/Java Libs/jsoup-1.7.3.jar" />
-	<classpathentry kind="lib"
-		path="C:/Users/Michał/Java Libs/commons-codec-1.9/commons-codec-1.9.jar" />
-	<classpathentry kind="output" path="bin" />
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Java Libs/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Java Libs/jsoup-1.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Java Libs/commons-codec-1.9/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michał/Java Libs/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
