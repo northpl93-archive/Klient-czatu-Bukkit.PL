@@ -59,6 +59,7 @@ public class ChatWindow extends JFrame
                 Main.debug("Nie znaleziono klucza sesji... Nie wys�ano polecenia wylogowania, ani nie zapisano sesji do configu");
                 Main.saveConfig();
                 e.getWindow().dispose();
+                Main.getTray().hide();
             }
         });
 	}

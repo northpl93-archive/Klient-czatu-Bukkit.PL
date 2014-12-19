@@ -60,12 +60,21 @@ public class XenForoUtils
 				+ "_xfResponseType=json";
 		if(visible)
 		{
-			rawData = rawData+"&visible=1";
+			rawData += "&visible=1";
 		}
 		String response = PostExecute.excutePost("http://bukkit.pl/account/toggle-visibility", rawData);
 		Gson gson = new Gson();
 		JsonToggleVisibilityParser object = gson.fromJson(response, JsonToggleVisibilityParser.class);
 		Main.debug("XenForoUtils -> toggleVisibility -> response: "+response);
 		return object.get_redirectMessage();
+	}
+	
+	public static void removeMessage(String xfToken, String messageId)
+	{
+		String rawData =
+				"_xfToken="+xfToken+"&"
+				+ "_xfResponseType=json";
+		String response = PostExecute.excutePost("http://bukkit.pl/taigachat/"+messageId+"/delete", rawData);
+		Main.debug("XenForoUtils -> removeMessage -> response: "+response);
 	}
 }
