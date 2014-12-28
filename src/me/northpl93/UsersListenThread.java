@@ -22,6 +22,8 @@ public class UsersListenThread extends Thread
 	private ArrayList<String> latestUsers = null;
 	private ArrayList<String> newUsers    = null;
 	
+	public ArrayList<String> publicUsers = new ArrayList<String>();
+	
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public void run()
@@ -69,15 +71,18 @@ public class UsersListenThread extends Thread
 			}
 			
 			String[] users = nonSplittedUsers.split(",");
+			publicUsers = new ArrayList<String>();
 			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.removeAll();
 			for(String s : users)
 			{
 				if(s.equalsIgnoreCase(Main.getLoggedUserName()))
 				{
+					this.publicUsers.add(s);
 					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s+" (Ty)");
 				}
 				else
 				{
+					this.publicUsers.add(s);
 					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s);
 				}
 			}

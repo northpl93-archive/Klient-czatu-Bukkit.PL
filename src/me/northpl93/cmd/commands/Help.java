@@ -3,11 +3,8 @@ package me.northpl93.cmd.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.northpl93.ChatListenThread;
-import me.northpl93.Main;
 import me.northpl93.cmd.CommandExecutor;
 import me.northpl93.cmd.CommandManager;
-import me.northpl93.utils.XenForoUtils;
 
 public class Help implements CommandExecutor
 {
