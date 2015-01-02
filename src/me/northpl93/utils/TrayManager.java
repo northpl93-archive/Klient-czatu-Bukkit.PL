@@ -14,6 +14,7 @@ import me.northpl93.Main;
 
 public class TrayManager
 {
+	private boolean supported = true;
 	private PopupMenu popup;
 	private TrayIcon trayIcon;
 	private SystemTray tray;
@@ -29,6 +30,7 @@ public class TrayManager
 		if (!SystemTray.isSupported())
 		{
 			Main.debug("SystemTray is not supported");
+			supported = false;
 			return;
 		}
 		popup = new PopupMenu();
@@ -54,6 +56,10 @@ public class TrayManager
 	
 	public void show()
 	{
+		if(!supported)
+		{
+			return;
+		}
 		try
 		{
 			tray.add(trayIcon);
@@ -61,16 +67,25 @@ public class TrayManager
 		catch (AWTException e)
 		{
 			Main.debug("TrayIcon could not be added.");
+			supported = false;
 		}
 	}
 	
 	public void hide()
 	{
+		if(!supported)
+		{
+			return;
+		}
 		tray.remove(trayIcon);
 	}
 	
 	public void showMessage(final String message)
 	{
+		if(!supported)
+		{
+			return;
+		}
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			@Override
