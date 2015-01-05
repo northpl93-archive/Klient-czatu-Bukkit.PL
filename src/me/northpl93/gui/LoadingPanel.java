@@ -15,19 +15,20 @@ public class LoadingPanel extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public LoadingPanel() {
+	public LoadingPanel()
+	{
 		setLayout(null);
-		
+
 		JLabel lblProszCzeka = new JLabel("Prosz\u0119 czeka\u0107...");
 		lblProszCzeka.setBounds(262, 160, 110, 14);
 		add(lblProszCzeka);
-		
+
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(194, 210, 227, 14);
 		progressBar.setIndeterminate(true);
 		add(progressBar);
-		
-		JLabel lblWersjaLol = new JLabel("Wersja "+Main.getVersion());
+
+		JLabel lblWersjaLol = new JLabel("Wersja " + Main.getVersion());
 		lblWersjaLol.setForeground(Color.LIGHT_GRAY);
 		lblWersjaLol.setBounds(0, 303, 152, 14);
 		add(lblWersjaLol);

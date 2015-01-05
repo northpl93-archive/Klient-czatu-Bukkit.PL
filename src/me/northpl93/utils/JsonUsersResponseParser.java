@@ -4,9 +4,11 @@ public class JsonUsersResponseParser
 {
 	private String templateHtml;
 	private String sidebarHtml;
-	
-	public JsonUsersResponseParser(){}
-	
+
+	public JsonUsersResponseParser()
+	{
+	}
+
 	public String getSidebarHtml()
 	{
 		return sidebarHtml;

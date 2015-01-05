@@ -12,7 +12,7 @@ import me.northpl93.utils.XenForoUtils;
 public class ToggleVisibility implements CommandExecutor
 {
 	CommandManager cmdMngr = null;
-	
+
 	@Override
 	public String getCommandInfo()
 	{
@@ -38,31 +38,37 @@ public class ToggleVisibility implements CommandExecutor
 	@Override
 	public void execute(String[] args)
 	{
-		if(args.length == 0)
+		if (args.length == 0)
 		{
 			cmdMngr.sendMessage("Użycie: /togglevisibility true/false");
 			return;
 		}
-		
-		if(args.length > 1)
+
+		if (args.length > 1)
 		{
 			cmdMngr.sendMessage("Użycie: /togglevisibility true/false");
 			return;
 		}
-		
-		if(Main.getLoggedUserName().isEmpty() || ((ChatListenThread)Main.chatListener).getLoggedUser().isEmpty())
+
+		if (Main.getLoggedUserName().isEmpty()
+				|| ((ChatListenThread) Main.chatListener).getLoggedUser()
+						.isEmpty())
 		{
 			cmdMngr.sendMessage("Musisz być zalogowany, aby użyć tej komendy");
 			return;
 		}
-		
-		if(args[0].equalsIgnoreCase("true"))
+
+		if (args[0].equalsIgnoreCase("true"))
 		{
-			cmdMngr.sendMessage(XenForoUtils.toggleVisibility(((ChatListenThread)Main.chatListener).getLoggedUser(), true));
+			cmdMngr.sendMessage(XenForoUtils.toggleVisibility(
+					((ChatListenThread) Main.chatListener).getLoggedUser(),
+					true));
 		}
-		else if(args[0].equalsIgnoreCase("false"))
+		else if (args[0].equalsIgnoreCase("false"))
 		{
-			cmdMngr.sendMessage(XenForoUtils.toggleVisibility(((ChatListenThread)Main.chatListener).getLoggedUser(), false));
+			cmdMngr.sendMessage(XenForoUtils.toggleVisibility(
+					((ChatListenThread) Main.chatListener).getLoggedUser(),
+					false));
 		}
 		else
 		{
@@ -70,5 +76,5 @@ public class ToggleVisibility implements CommandExecutor
 			return;
 		}
 	}
-	
+
 }

@@ -18,59 +18,66 @@ public class SwingKeyListener implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_ENTER)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
 			ChatPanel cp = (ChatPanel) PanelsEnum.CHAT_PANEL.getInstance();
-			
-			if(cp.wiadomoscDoWyslania.getText() == null || cp.wiadomoscDoWyslania.getText().equalsIgnoreCase(""))
+
+			if (cp.wiadomoscDoWyslania.getText() == null
+					|| cp.wiadomoscDoWyslania.getText().equalsIgnoreCase(""))
 			{
 				JOptionPane.showMessageDialog(null, "Musisz wpisać wiadomość!");
 				return;
 			}
-			
-			if(cp.wiadomoscDoWyslania.getText().startsWith("/"))
+
+			if (cp.wiadomoscDoWyslania.getText().startsWith("/"))
 			{
-				Main.getCommandManager().handleCommand(cp.wiadomoscDoWyslania.getText().substring(1));
+				Main.getCommandManager().handleCommand(
+						cp.wiadomoscDoWyslania.getText().substring(1));
 				cp.wiadomoscDoWyslania.setText("");
 				return;
 			}
-			
-			XenForoUtils.sendMessage(((ChatListenThread)Main.chatListener).getLoggedUser(), cp.wiadomoscDoWyslania.getText());
+
+			XenForoUtils.sendMessage(
+					((ChatListenThread) Main.chatListener).getLoggedUser(),
+					cp.wiadomoscDoWyslania.getText());
 			cp.wiadomoscDoWyslania.setText("");
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_SPACE)
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
 			JTextField tb = ((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).wiadomoscDoWyslania;
 			char[] textCharArray = tb.getText().toCharArray();
-			
+
 			int extractedTextStart = tb.getCaretPosition();
 			int actualCursorLocation = tb.getCaretPosition();
-			
-			while(true)
+
+			while (true)
 			{
-				int actuallyCheckedChar = extractedTextStart-1;
-				if(actuallyCheckedChar <= 0)
+				int actuallyCheckedChar = extractedTextStart - 1;
+				if (actuallyCheckedChar <= 0)
 				{
 					break;
 				}
-				if(textCharArray[actuallyCheckedChar] == ' ')
+				if (textCharArray[actuallyCheckedChar] == ' ')
 				{
-					return; //Dla bezpieczenstwa
+					return; // Dla bezpieczenstwa
 				}
-				if(textCharArray[actuallyCheckedChar] == '@')
+				if (textCharArray[actuallyCheckedChar] == '@')
 				{
 					break;
 				}
 				actuallyCheckedChar--;
 				extractedTextStart--;
 			}
-			
-			String extractedText = tb.getText().substring(extractedTextStart, actualCursorLocation);
-			for(String fullNick : ((UsersListenThread) Main.usersListener).publicUsers)
+
+			String extractedText = tb.getText().substring(extractedTextStart,
+					actualCursorLocation);
+			for (String fullNick : ((UsersListenThread) Main.usersListener).publicUsers)
 			{
-				if(fullNick.toLowerCase().contains(extractedText.toLowerCase()))
+				if (fullNick.toLowerCase()
+						.contains(extractedText.toLowerCase()))
 				{
-					tb.setText(tb.getText().replace("@"+extractedText, "@"+fullNick));
+					tb.setText(tb.getText().replace("@" + extractedText,
+							"@" + fullNick));
 					return;
 				}
 			}
@@ -78,8 +85,12 @@ public class SwingKeyListener implements KeyListener
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {}
+	public void keyReleased(KeyEvent e)
+	{
+	}
 
 	@Override
-	public void keyTyped(KeyEvent e){}
+	public void keyTyped(KeyEvent e)
+	{
+	}
 }

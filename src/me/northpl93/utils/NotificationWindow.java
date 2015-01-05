@@ -19,23 +19,43 @@ import javax.swing.WindowConstants;
 
 public class NotificationWindow extends JFrame
 {
-	private static final long serialVersionUID      = 1925248663422133218L;
-	
-	private static List<NotificationWindow> notWindows = new ArrayList<NotificationWindow>(1);
+	private static final long serialVersionUID = 1925248663422133218L;
+	private final Dimension screenSize = Toolkit.getDefaultToolkit()
+			.getScreenSize();
+	private final Insets toolHeight = Toolkit.getDefaultToolkit()
+			.getScreenInsets(getGraphicsConfiguration());
+	private static List<NotificationWindow> notWindows = new ArrayList<NotificationWindow>(
+			1);
+	private NotificationWindow instance;
 
 	public NotificationWindow(String title, String message, Icon ico)
 	{
 		super(title);
-		notWindows.add(this);
-		setSize(300,125);
+		instance = this;
+		notWindows.add(instance);
+		setSize(300, 125);
 		setLayout(new GridBagLayout());
 		setUndecorated(true);
 		setAlwaysOnTop(true);
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets toolHeight = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
-		setLocation(screenSize.width - getWidth(), screenSize.height - toolHeight.bottom - getHeight());
-		
+		setFocusable(false);
+		setLocationRelativeTo(null);
+		if (notWindows.size() > 1)
+		{
+			int x = screenSize.width - getWidth();
+			int y = screenSize.height - toolHeight.bottom - getHeight();
+
+			for (int i = 0; i < notWindows.size() - 1; i++)
+			{
+				y = y - 125;
+			}
+			setLocation(x, y);
+		}
+		else
+		{
+			setLocation(screenSize.width - getWidth(), screenSize.height
+					- toolHeight.bottom - getHeight());
+		}
+
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -58,9 +78,11 @@ public class NotificationWindow extends JFrame
 		cloesButton.addActionListener(new AbstractAction("x")
 		{
 			private static final long serialVersionUID = 5921376430472056767L;
+
 			@Override
 			public void actionPerformed(final ActionEvent e)
 			{
+				notWindows.remove(instance);
 				dispose();
 			}
 		});
@@ -71,11 +93,11 @@ public class NotificationWindow extends JFrame
 		constraints.weighty = 1.0f;
 		constraints.insets = new Insets(5, 5, 5, 5);
 		constraints.fill = GridBagConstraints.BOTH;
-		JLabel messageLabel = new JLabel("<HtMl>"+message);
+		JLabel messageLabel = new JLabel("<HtMl>" + message);
 		add(messageLabel, constraints);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
-		
+
 		new Thread()
 		{
 			@Override
@@ -84,40 +106,43 @@ public class NotificationWindow extends JFrame
 				try
 				{
 					Thread.sleep(5000);
-					dispose();
-					notWindows.remove(this);
 				}
 				catch (InterruptedException e)
 				{
 					e.printStackTrace();
 				}
+				notWindows.remove(instance);
+				dispose();
 			};
 		}.start();
 	}
-	
+
 	public static List<NotificationWindow> getNotificationWindows()
 	{
 		return notWindows;
 	}
-	
+
 	public void removeThisWindow()
 	{
 		this.dispose();
 		notWindows.remove(this);
 	}
-	
+
 	public enum Icons
 	{
-		CHAT(new ImageIcon(NotificationWindow.class.getResource("/images/chat.png"))), 
-		USER(new ImageIcon(NotificationWindow.class.getResource("/images/user.png")));
-		
+		CHAT(new ImageIcon(
+				NotificationWindow.class.getResource("/images/chat.png"))), USER(
+				new ImageIcon(
+						NotificationWindow.class
+								.getResource("/images/user.png")));
+
 		private Icon ico = null;
-		
+
 		private Icons(Icon ico)
 		{
 			this.ico = ico;
 		}
-		
+
 		public Icon getIco()
 		{
 			return ico;

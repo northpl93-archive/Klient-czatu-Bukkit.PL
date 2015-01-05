@@ -20,8 +20,10 @@ public class PostExecute
 			url = new URL(targetURL);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			connection.setRequestProperty("Content-Length", Integer.toString(urlParameters.getBytes().length));
+			connection.setRequestProperty("Content-Type",
+					"application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Length",
+					Integer.toString(urlParameters.getBytes().length));
 			connection.setRequestProperty("Content-Language", "pl-PL");
 			connection.setRequestProperty("charset", "UTF-8");
 
@@ -30,7 +32,8 @@ public class PostExecute
 			connection.setDoOutput(true);
 
 			// Send request
-			DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+			DataOutputStream wr = new DataOutputStream(
+					connection.getOutputStream());
 			wr.write(urlParameters.getBytes("UTF-8"));
 			wr.flush();
 			wr.close();

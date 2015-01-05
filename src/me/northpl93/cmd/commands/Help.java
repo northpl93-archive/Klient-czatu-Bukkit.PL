@@ -9,7 +9,7 @@ import me.northpl93.cmd.CommandManager;
 public class Help implements CommandExecutor
 {
 	CommandManager cmdMngr = null;
-	
+
 	@Override
 	public String getCommandInfo()
 	{
@@ -36,12 +36,12 @@ public class Help implements CommandExecutor
 	public void execute(String[] args)
 	{
 		cmdMngr.sendMessage("Lista wszystkich komend: \n");
-		for(CommandExecutor exe : cmdMngr.getCommands())
+		for (CommandExecutor exe : cmdMngr.getCommands())
 		{
 			StringBuilder sb = new StringBuilder();
-			
+
 			sb.append("» ");
-			sb.append(exe.getCommandTemplates().get(0)); //Jako główna komenda jest wyświetlana pierwsza opcja z listy dostępnych
+			sb.append(exe.getCommandTemplates().get(0)); // Jako główna komenda jest wyświetlana pierwsza opcja z listy dostępnych
 			sb.append(" - ");
 			sb.append(exe.getCommandInfo());
 			sb.append("\n");

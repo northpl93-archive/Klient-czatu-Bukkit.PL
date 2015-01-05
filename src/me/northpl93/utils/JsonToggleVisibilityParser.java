@@ -7,8 +7,10 @@ public class JsonToggleVisibilityParser
 	private String _redirectMessage;
 	private int _visitor_conversationsUnread;
 	private int _visitor_alertsUnread;
-	
-	public JsonToggleVisibilityParser(){}
+
+	public JsonToggleVisibilityParser()
+	{
+	}
 
 	public String get_redirectStatus()
 	{

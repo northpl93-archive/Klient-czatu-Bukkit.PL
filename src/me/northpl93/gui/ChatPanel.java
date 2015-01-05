@@ -20,16 +20,16 @@ import me.northpl93.utils.XenForoUtils;
 public class ChatPanel extends JPanel
 {
 
-	private static final long	serialVersionUID	= -4902262492595144810L;
-	private SwingKeyListener	skl					= new SwingKeyListener();
-	private boolean				isListVisible		= true;
+	private static final long serialVersionUID = -4902262492595144810L;
+	private SwingKeyListener skl = new SwingKeyListener();
+	private boolean isListVisible = true;
 
-	public JTextField			wiadomoscDoWyslania;
-	public List			        list;
-	private JTextArea	    	textArea;
-	private JScrollPane			jScrollPane;
-	private JScrollBar			vertical;
-	private JButton             przyciskOdWysylania;
+	public JTextField wiadomoscDoWyslania;
+	public List list;
+	private JTextArea textArea;
+	private JScrollPane jScrollPane;
+	private JScrollBar vertical;
+	private JButton przyciskOdWysylania;
 
 	/**
 	 * Create the panel.

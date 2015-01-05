@@ -18,115 +18,142 @@ import com.google.gson.Gson;
 
 public class UsersListenThread extends Thread
 {
-	public String cacheXfToken       = "";
+	public String cacheXfToken = "";
 	private ArrayList<String> latestUsers = null;
-	private ArrayList<String> newUsers    = null;
-	
+	private ArrayList<String> newUsers = null;
+
 	public ArrayList<String> publicUsers = new ArrayList<String>();
-	
+
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public void run()
 	{
 		Gson gson = new Gson();
-		
-		while(true)
+
+		while (true)
 		{
 			String xfToken = "";
-			if(Main.chatListener != null)
+			if (Main.chatListener != null)
 			{
-				xfToken = ((ChatListenThread)Main.chatListener).getLoggedUser();
+				xfToken = ((ChatListenThread) Main.chatListener)
+						.getLoggedUser();
 			}
 			else
 			{
 				xfToken = cacheXfToken;
 			}
-			
-			String content = PostExecute.excutePost("http://bukkit.pl/shoutbox", "_xfToken="+xfToken+"&_xfResponseType=json");
-			
-			if(content == null)
+
+			String content = PostExecute.excutePost(
+					"http://bukkit.pl/shoutbox", "_xfToken=" + xfToken
+							+ "&_xfResponseType=json");
+
+			if (content == null)
 			{
 				Main.debug("Nie można pobrać listy użytkowników: Wystąpił problem z połączeniem. Wątek zostanie zatrzymany...\n");
 				this.stop();
 				return;
 			}
-			JsonUsersResponseParser decoded_json = gson.fromJson(content, JsonUsersResponseParser.class);
-			
+			JsonUsersResponseParser decoded_json = gson.fromJson(content,
+					JsonUsersResponseParser.class);
+
 			Document document = Jsoup.parse(decoded_json.getSidebarHtml());
-			
-			Elements as = document.getElementsByAttributeValue("class", "section membersOnline userList");
+
+			Elements as = document.getElementsByAttributeValue("class",
+					"section membersOnline userList");
 			int i = 0;
 			String nonSplittedUsers = "";
-			
-			for(Element e : as)
+
+			for (Element e : as)
 			{
-				for(Element users : e.getElementsByAttributeValue("class", "listInline"))
+				for (Element users : e.getElementsByAttributeValue("class",
+						"listInline"))
 				{
-					if(i == 1)
+					if (i == 1)
 					{
-						nonSplittedUsers = users.text().toString().replace(" ", "");
+						nonSplittedUsers = users.text().toString()
+								.replace(" ", "");
 					}
 				}
 				i++;
 			}
-			
+
 			String[] users = nonSplittedUsers.split(",");
 			publicUsers = new ArrayList<String>();
-			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.removeAll();
-			for(String s : users)
+			((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).list.removeAll();
+			for (String s : users)
 			{
-				if(s.equalsIgnoreCase(Main.getLoggedUserName()))
+				if (s.equalsIgnoreCase(Main.getLoggedUserName()))
 				{
 					this.publicUsers.add(s);
-					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s+" (Ty)");
+					((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).list
+							.add(s + " (Ty)");
 				}
 				else
 				{
 					this.publicUsers.add(s);
-					((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).list.add(s);
+					((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).list
+							.add(s);
 				}
 			}
-			
+
 			newUsers = new ArrayList<String>(Arrays.asList(users));
-			
-			if(latestUsers != null)
-			{	
-				for(String s : latestUsers)
+
+			if (latestUsers != null)
+			{
+				for (String s : latestUsers)
 				{
-					if(!newUsers.contains(s))
+					if (!newUsers.contains(s))
 					{
-						if(Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						if (Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW
+								&& Main.getConfig().isNotification_userAction()
+								&& !Main.getMainWindow().isActive())
 						{
-							new NotificationWindow(Main.getMsgHeader(), "Użytkownik "+s+" opuścił czat!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow(Main.getMsgHeader(),
+									"Użytkownik " + s + " opuścił czat!",
+									NotificationWindow.Icons.USER.getIco());
 						}
-						else if(Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						else if (Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON
+								&& Main.getConfig().isNotification_userAction()
+								&& !Main.getMainWindow().isActive())
 						{
-							Main.getTray().showMessage("Użytkownik "+s+" opuścił czat!");
+							Main.getTray().showMessage(
+									"Użytkownik " + s + " opuścił czat!");
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] - Użytkownik "+s+" opuścił czat\n");
+						((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance())
+								.addMessage("[INFO] - Użytkownik " + s
+										+ " opuścił czat\n");
 					}
 				}
-				
-				for(String s : newUsers)
+
+				for (String s : newUsers)
 				{
-					if(!latestUsers.contains(s))
+					if (!latestUsers.contains(s))
 					{
-						if(Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						if (Main.getConfig().getNotificationType() == Configuration.NotificationType.WINDOW
+								&& Main.getConfig().isNotification_userAction()
+								&& !Main.getMainWindow().isActive())
 						{
-							new NotificationWindow(Main.getMsgHeader(), "Użytkownik "+s+" dołączył do czatu!", NotificationWindow.Icons.USER.getIco());
+							new NotificationWindow(Main.getMsgHeader(),
+									"Użytkownik " + s + " dołączył do czatu!",
+									NotificationWindow.Icons.USER.getIco());
 						}
-						else if(Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON && Main.getConfig().isNotification_userAction() && !Main.getMainWindow().isActive())
+						else if (Main.getConfig().getNotificationType() == Configuration.NotificationType.BALLON
+								&& Main.getConfig().isNotification_userAction()
+								&& !Main.getMainWindow().isActive())
 						{
-							Main.getTray().showMessage("Użytkownik "+s+" dołączył do czatu!");
+							Main.getTray().showMessage(
+									"Użytkownik " + s + " dołączył do czatu!");
 						}
-						((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[INFO] + Użytkownik "+s+" dołączył do czatu\n");
+						((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance())
+								.addMessage("[INFO] + Użytkownik " + s
+										+ " dołączył do czatu\n");
 					}
 				}
 			}
-			
+
 			latestUsers = (ArrayList<String>) newUsers.clone();
 			newUsers = null;
-			
+
 			try
 			{
 				Thread.sleep(15000);
@@ -137,5 +164,5 @@ public class UsersListenThread extends Thread
 			}
 		}
 	}
-	
+
 }

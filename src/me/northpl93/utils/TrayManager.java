@@ -18,12 +18,12 @@ public class TrayManager
 	private PopupMenu popup;
 	private TrayIcon trayIcon;
 	private SystemTray tray;
-	
+
 	public TrayManager()
 	{
 		setup();
 	}
-	
+
 	private void setup()
 	{
 		Main.debug("TrayManager -> Setup()");
@@ -36,27 +36,28 @@ public class TrayManager
 		popup = new PopupMenu();
 		try
 		{
-			trayIcon = new TrayIcon(ImageIO.read(getClass().getResourceAsStream("/images/chat.png")));
+			trayIcon = new TrayIcon(ImageIO.read(getClass()
+					.getResourceAsStream("/images/chat.png")));
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 		tray = SystemTray.getSystemTray();
-       
+
 		MenuItem showhide = new MenuItem("Pokaż/ukryj okno");
 		MenuItem settings = new MenuItem("Ustawienia");
 		MenuItem exit = new MenuItem("Zamknij czat");
-       
+
 		popup.add(showhide);
 		popup.add(settings);
 		popup.add(exit);
 		trayIcon.setPopupMenu(popup);
 	}
-	
+
 	public void show()
 	{
-		if(!supported)
+		if (!supported)
 		{
 			return;
 		}
@@ -70,19 +71,19 @@ public class TrayManager
 			supported = false;
 		}
 	}
-	
+
 	public void hide()
 	{
-		if(!supported)
+		if (!supported)
 		{
 			return;
 		}
 		tray.remove(trayIcon);
 	}
-	
+
 	public void showMessage(final String message)
 	{
-		if(!supported)
+		if (!supported)
 		{
 			return;
 		}
@@ -91,7 +92,8 @@ public class TrayManager
 			@Override
 			public void run()
 			{
-				trayIcon.displayMessage(Main.getMsgHeader(), message, TrayIcon.MessageType.INFO);
+				trayIcon.displayMessage(Main.getMsgHeader(), message,
+						TrayIcon.MessageType.INFO);
 			}
 		});
 	}

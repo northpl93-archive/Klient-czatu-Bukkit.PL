@@ -12,16 +12,21 @@ public class LoginPanelSwingKeyListener implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_ENTER)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
-			((WelcomePanel) PanelsEnum.WELCOME_PANEL.getInstance()).loginStuff();
+			((WelcomePanel) PanelsEnum.WELCOME_PANEL.getInstance())
+					.loginStuff();
 		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {}
+	public void keyReleased(KeyEvent arg0)
+	{
+	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0)
+	{
+	}
 
 }

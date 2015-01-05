@@ -21,29 +21,37 @@ public class SessionRestorePanel extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public SessionRestorePanel() {
+	public SessionRestorePanel()
+	{
 		setLayout(null);
-		
-		JLabel lblCzyChceszPrzywrci = new JLabel("Czy chcesz zalogowa\u0107 si\u0119 ponownie poprzednimi danymi?");
+
+		JLabel lblCzyChceszPrzywrci = new JLabel(
+				"Czy chcesz zalogowa\u0107 si\u0119 ponownie poprzednimi danymi?");
 		lblCzyChceszPrzywrci.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCzyChceszPrzywrci.setBounds(10, 133, 630, 14);
 		add(lblCzyChceszPrzywrci);
-		
+
 		JButton btnTak = new JButton("Tak");
-		btnTak.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnTak.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				Main.debug("User chce przwrócić sesję...");
 				Main.getConfig().setSessionStored(true);
-				if(Main.chatListener == null)
+				if (Main.chatListener == null)
 				{
 					Main.chatListener = new ChatListenThread();
 				}
-				((ChatListenThread) Main.chatListener).setLoggedUser(XenForoUtils.loginUser(Main.getConfig().getStoredNick(), Main.getConfig().getStoredPassword()));
+				((ChatListenThread) Main.chatListener)
+						.setLoggedUser(XenForoUtils.loginUser(Main.getConfig()
+								.getStoredNick(), Main.getConfig()
+								.getStoredPassword()));
 				Main.setLoggedUserName(Main.getConfig().getStoredNick());
-				Main.debug("Przywrócony nick: "+Main.getConfig().getStoredNick());
+				Main.debug("Przywrócony nick: "
+						+ Main.getConfig().getStoredNick());
 				Main.debug("Przywrócono sesje!");
-				Main.chatListener.start(); //Odpalanie pobierania postow z shoutboxa
-				if(Main.usersListener == null)
+				Main.chatListener.start(); // Odpalanie pobierania postow z shoutboxa
+				if (Main.usersListener == null)
 				{
 					Main.usersListener = new UsersListenThread();
 				}
@@ -55,14 +63,16 @@ public class SessionRestorePanel extends JPanel
 		});
 		btnTak.setBounds(187, 158, 89, 23);
 		add(btnTak);
-		
+
 		JButton btnNie = new JButton("Nie");
-		btnNie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNie.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				Main.debug("User nie chciał przywracać sesji.");
-        		Main.getConfig().setStoredNick(null);
-        		Main.getConfig().setStoredPassword("");
-        		Main.getConfig().setSessionStored(false);
+				Main.getConfig().setStoredNick(null);
+				Main.getConfig().setStoredPassword("");
+				Main.getConfig().setSessionStored(false);
 				Main.switchPanel(PanelsEnum.WELCOME_PANEL.getInstance());
 			}
 		});

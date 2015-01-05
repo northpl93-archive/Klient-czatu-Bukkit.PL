@@ -27,96 +27,101 @@ import me.northpl93.utils.TrayManager;
 
 public class Main
 {
-	public static Thread chatListener            = null;
-	public static Thread usersListener           = null;
-	public static Thread wathDogThread           = null;
-	private static TrayManager trayManager       = null;
-	private static JFrame window                 = null;
-	private static CommandManager cmdMngr        = null;
-	private static CookieManager cookieHandler   = null;
-	private static Configuration config          = null;
-	private static File configFile               = null;
-	private static File workDirectory            = null;
-	
-	private static String loggedUserName         = "";
-	
-	private static final String VERSION          = "1.4.0 INDEV";
-	private static final String msgHeader        = "";
-	
-	
+	public static Thread chatListener = null;
+	public static Thread usersListener = null;
+	public static Thread wathDogThread = null;
+	private static TrayManager trayManager = null;
+	private static JFrame window = null;
+	private static CommandManager cmdMngr = null;
+	private static CookieManager cookieHandler = null;
+	private static Configuration config = null;
+	private static File configFile = null;
+	private static File workDirectory = null;
+
+	private static String loggedUserName = "";
+
+	private static final String VERSION = "1.4.0 INDEV";
+	private static final String msgHeader = "";
+
 	public static void main(String[] args)
 	{
-		System.out.println("start "+VERSION);
+		System.out.println("start " + VERSION);
 		initializeConfig();
 		setupLog();
-		switchPanel(PanelsEnum.LOADING_PANEL.getInstance()); //Ustawienie panelu na wczytywanie
-        cookieHandler = new CookieManager();
-        cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        CookieHandler.setDefault(cookieHandler);
-        
+		switchPanel(PanelsEnum.LOADING_PANEL.getInstance()); // Ustawienie panelu na wczytywanie
+		cookieHandler = new CookieManager();
+		cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+		CookieHandler.setDefault(cookieHandler);
+
 		trayManager = new TrayManager();
 		trayManager.show();
-		
+
 		chatListener = new ChatListenThread();
 		usersListener = new UsersListenThread();
 		cmdMngr = new CommandManager();
 		registerCommands();
-		
-		if(config.isSessionStored())
+
+		if (config.isSessionStored())
 		{
 			debug("W configu jest informacja o zachowanych danych logowania");
-			switchPanel(PanelsEnum.SESSION_RESTORE_PANEL.getInstance()); //Ustawienie panelu na przywracanie sesji
+			switchPanel(PanelsEnum.SESSION_RESTORE_PANEL.getInstance()); // Ustawienie panelu na przywracanie sesji
 		}
 		else
 		{
 			debug("W configu nie ma informacji o koniecznosci przywracania sesji");
-			switchPanel(PanelsEnum.WELCOME_PANEL.getInstance()); //Ustawienie panelu na logowanie
+			switchPanel(PanelsEnum.WELCOME_PANEL.getInstance()); // Ustawienie panelu na logowanie
 		}
 	}
-	
+
 	/**
 	 * Wyświetla wiadomośc na konsoli (zawsze) i w oknie czatu (tylko gdy włączone debugowanie na czat)
 	 * 
-	 * @param message Wiadomość do wyświetlenia
+	 * @param message
+	 *            Wiadomość do wyświetlenia
 	 */
 	public static void debug(String message)
 	{
 		System.out.println(message);
-		
-		if(getConfig() != null && getConfig().isDebugOnChat())
+
+		if (getConfig() != null && getConfig().isDebugOnChat())
 		{
-			((ChatPanel)PanelsEnum.CHAT_PANEL.getInstance()).addMessage("[DEBUG] "+message);
+			((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance())
+					.addMessage("[DEBUG] " + message);
 		}
 	}
-	
+
 	private static void registerCommands()
 	{
 		cmdMngr.registerCommand(new Help());
 		cmdMngr.registerCommand(new ToggleVisibility());
+		cmdMngr.registerCommand(new FakeNotification());
 	}
-	
+
 	/**
 	 * Zmienia aktualnie widoczny panel
 	 * 
-	 * @param newPane Nowy panel do ustawienia. Najlepiej pobrany z PanelsEnum
-	 * @see   PanelsEnum
+	 * @param newPane
+	 *            Nowy panel do ustawienia. Najlepiej pobrany z PanelsEnum
+	 * @see PanelsEnum
 	 */
 	public static void switchPanel(final JPanel newPane)
 	{
-		if(window == null)
+		if (window == null)
 		{
 			window = new ChatWindow();
 		}
-		
-		SwingUtilities.invokeLater(new Runnable() {
+
+		SwingUtilities.invokeLater(new Runnable()
+		{
 			@Override
-			public void run() {
+			public void run()
+			{
 				window.setContentPane(newPane);
 				window.revalidate();
 			}
 		});
 	}
-	
+
 	public static void initializeConfig()
 	{
 		String workingDirectory;
@@ -124,27 +129,27 @@ public class Main
 		String OS = (System.getProperty("os.name")).toUpperCase();
 		if (OS.contains("WIN"))
 		{
-		    workingDirectory = System.getenv("AppData");
+			workingDirectory = System.getenv("AppData");
 		}
 		else
 		{
-		    workingDirectory = System.getProperty("user.home");
+			workingDirectory = System.getProperty("user.home");
 		}
-		workingDirectory += s+".bukkitpl-chat-northpl";
-		
-		debug("workingDirectory=="+workingDirectory);
-		
+		workingDirectory += s + ".bukkitpl-chat-northpl";
+
+		debug("workingDirectory==" + workingDirectory);
+
 		workDirectory = new File(workingDirectory);
-		if(!workDirectory.exists())
+		if (!workDirectory.exists())
 		{
 			debug("working directory nie istnieje. Tworzę...");
 			workDirectory.mkdirs();
 		}
-		
-		configFile = new File(workingDirectory+=s+"config.dat");
-		debug("configFile=="+configFile);
-		
-		if(!configFile.isDirectory() && !configFile.exists())
+
+		configFile = new File(workingDirectory += s + "config.dat");
+		debug("configFile==" + configFile);
+
+		if (!configFile.isDirectory() && !configFile.exists())
 		{
 			debug("Plik configu nie istnieje. Tworzę nowy...");
 			try
@@ -156,7 +161,7 @@ public class Main
 				e.printStackTrace();
 			}
 		}
-		
+
 		try
 		{
 			FileInputStream fin = new FileInputStream(configFile);
@@ -168,12 +173,12 @@ public class Main
 		{
 			debug("Błąd podczas wczytywania pliku konfiguracyjnego (pierwsze odpalenie programu?)");
 			debug("Załadowany zostanie domyślny config..");
-			
+
 			config = new Configuration();
 			config.setDefaults();
 		}
 	}
-	
+
 	public static void saveConfig()
 	{
 		debug("Zapisywanie configu...");
@@ -189,12 +194,17 @@ public class Main
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void setupLog()
 	{
-		File logFile = new File(workDirectory.getPath()+System.getProperty("file.separator")+"logs"+System.getProperty("file.separator")+FastDateFormat.getInstance("dd-MM-yyyy--HH-mm-ss").format(System.currentTimeMillis( ))+".txt");
+		File logFile = new File(workDirectory.getPath()
+				+ System.getProperty("file.separator")
+				+ "logs"
+				+ System.getProperty("file.separator")
+				+ FastDateFormat.getInstance("dd-MM-yyyy--HH-mm-ss").format(
+						System.currentTimeMillis()) + ".txt");
 		new File(logFile.getParent()).mkdirs();
-		if(!logFile.exists())
+		if (!logFile.exists())
 		{
 			try
 			{
@@ -205,7 +215,7 @@ public class Main
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Log file located at: "+logFile.getAbsolutePath());
+		System.out.println("Log file located at: " + logFile.getAbsolutePath());
 		System.out.println("Binding out stream to file...");
 		PrintStream out = null;
 		try
@@ -219,42 +229,42 @@ public class Main
 		System.setOut(out);
 		System.out.println("Log binded to file");
 	}
-	
+
 	public static JFrame getMainWindow()
 	{
 		return window;
 	}
-	
+
 	public static CommandManager getCommandManager()
 	{
 		return cmdMngr;
 	}
-	
+
 	public static Configuration getConfig()
 	{
 		return config;
 	}
-	
+
 	public static String getLoggedUserName()
 	{
 		return loggedUserName;
 	}
-	
+
 	public static void setLoggedUserName(String _loggedUserName)
 	{
 		loggedUserName = _loggedUserName;
 	}
-	
+
 	public static String getVersion()
 	{
 		return VERSION;
 	}
-	
+
 	public static TrayManager getTray()
 	{
 		return trayManager;
 	}
-	
+
 	public static String getMsgHeader()
 	{
 		return msgHeader;
