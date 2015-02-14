@@ -82,6 +82,7 @@ public class ChatListenThread extends Thread
 				 */
 
 				StringBuilder sb = new StringBuilder();
+				boolean isBreak = false;
 
 				/*
 				 * sb.append(getFirstStringObject(element.getElementsByClass("username")));
@@ -94,6 +95,12 @@ public class ChatListenThread extends Thread
 							&& !Main.getMainWindow().isActive())
 					{
 
+					}
+					
+					if(Main.getConfig().getBlockedUsers().contains(el.text()))
+					{
+						isBreak = true;
+						break;
 					}
 
 					if (latestMessage != 0
@@ -118,6 +125,12 @@ public class ChatListenThread extends Thread
 
 					sb.append(el.text());
 					sb.append(": ");
+					break;
+				}
+				
+				if(isBreak)
+				{
+					continue;
 				}
 
 				/*
@@ -146,6 +159,7 @@ public class ChatListenThread extends Thread
 					}
 
 					sb.append("\n");
+					break;
 				}
 
 				((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).addMessage(sb

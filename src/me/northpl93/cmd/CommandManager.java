@@ -39,7 +39,7 @@ public class CommandManager
 			}
 		}
 		((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance())
-				.addMessage("Nie znaleziono komendy! Wpisz /help aby uzyskać listę komend");
+				.addMessage("Nie znaleziono komendy! Wpisz /help aby uzyskać listę komend \n");
 	}
 
 	public ArrayList<CommandExecutor> getCommands()
@@ -49,6 +49,6 @@ public class CommandManager
 
 	public void sendMessage(String msg)
 	{
-		((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).addMessage(msg);
+		((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).addMessage(msg+"\n");
 	}
 }

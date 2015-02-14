@@ -95,6 +95,7 @@ public class Main
 		cmdMngr.registerCommand(new Help());
 		cmdMngr.registerCommand(new ToggleVisibility());
 		cmdMngr.registerCommand(new FakeNotification());
+		cmdMngr.registerCommand(new Ignore());
 	}
 
 	/**
