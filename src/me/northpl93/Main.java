@@ -96,6 +96,7 @@ public class Main
 		cmdMngr.registerCommand(new ToggleVisibility());
 		cmdMngr.registerCommand(new FakeNotification());
 		cmdMngr.registerCommand(new Ignore());
+		cmdMngr.registerCommand(new IgnoreList());
 	}
 
 	/**
@@ -173,7 +174,7 @@ public class Main
 		catch (Exception e)
 		{
 			debug("Błąd podczas wczytywania pliku konfiguracyjnego (pierwsze odpalenie programu?)");
-			debug("Załadowany zostanie domyślny config..");
+			debug("Załadowany zostanie domyślny config...");
 
 			config = new Configuration();
 			config.setDefaults();
