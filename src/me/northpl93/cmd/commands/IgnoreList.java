@@ -9,8 +9,8 @@ import me.northpl93.cmd.CommandManager;
 
 public class IgnoreList implements CommandExecutor
 {
-	CommandManager cmdMngr = null;
-	
+	private CommandManager cmdMngr = null;
+
 	@Override
 	public String getCommandInfo()
 	{
@@ -39,8 +39,8 @@ public class IgnoreList implements CommandExecutor
 	@Override
 	public void execute(String[] args)
 	{
-		StringBuffer sb = new StringBuffer();
-		for(String s : Main.getConfig().getBlockedUsers())
+		StringBuilder sb = new StringBuilder();
+		for (String s : Main.getConfig().getBlockedUsers())
 		{
 			sb.append(s);
 			sb.append(", ");

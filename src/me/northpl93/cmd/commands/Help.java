@@ -8,7 +8,7 @@ import me.northpl93.cmd.CommandManager;
 
 public class Help implements CommandExecutor
 {
-	CommandManager cmdMngr = null;
+	private CommandManager cmdMngr = null;
 
 	@Override
 	public String getCommandInfo()
@@ -38,7 +38,7 @@ public class Help implements CommandExecutor
 		cmdMngr.sendMessage("Lista wszystkich komend: \n");
 		for (CommandExecutor exe : cmdMngr.getCommands())
 		{
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("» ");
 			sb.append(exe.getCommandTemplates().get(0)); // Jako główna komenda jest wyświetlana pierwsza opcja z listy dostępnych

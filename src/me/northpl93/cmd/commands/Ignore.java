@@ -9,8 +9,8 @@ import me.northpl93.cmd.CommandManager;
 
 public class Ignore implements CommandExecutor
 {
-	CommandManager cmdMngr = null;
-	
+	private CommandManager cmdMngr = null;
+
 	@Override
 	public String getCommandInfo()
 	{
@@ -35,26 +35,26 @@ public class Ignore implements CommandExecutor
 	@Override
 	public void execute(String[] args)
 	{
-		if(args.length==0)
+		if (args.length == 0)
 		{
 			cmdMngr.sendMessage("Uzycie: /ignore nick");
 			return;
 		}
-		else if(args.length > 1)
+		else if (args.length > 1)
 		{
 			cmdMngr.sendMessage("Uzycie: /ignore nick");
 			return;
 		}
-		
-		if(Main.getConfig().getBlockedUsers().contains(args[0]))
+
+		if (Main.getConfig().getBlockedUsers().contains(args[0]))
 		{
 			Main.getConfig().getBlockedUsers().remove(args[0]);
-			cmdMngr.sendMessage(args[0]+" usuniety z listy ignorowanych");
+			cmdMngr.sendMessage(args[0] + " usuniety z listy ignorowanych");
 		}
 		else
 		{
 			Main.getConfig().getBlockedUsers().add(args[0]);
-			cmdMngr.sendMessage(args[0]+" dodany do listy ignorowanych");
+			cmdMngr.sendMessage(args[0] + " dodany do listy ignorowanych");
 		}
 	}
 }

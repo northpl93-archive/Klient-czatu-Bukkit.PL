@@ -49,6 +49,7 @@ public class CommandManager
 
 	public void sendMessage(String msg)
 	{
-		((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance()).addMessage(msg+"\n");
+		((ChatPanel) PanelsEnum.CHAT_PANEL.getInstance())
+				.addMessage(msg + "\n");
 	}
 }

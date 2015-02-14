@@ -11,7 +11,7 @@ import me.northpl93.utils.XenForoUtils;
 
 public class ToggleVisibility implements CommandExecutor
 {
-	CommandManager cmdMngr = null;
+	private CommandManager cmdMngr = null;
 
 	@Override
 	public String getCommandInfo()

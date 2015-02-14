@@ -96,8 +96,8 @@ public class ChatListenThread extends Thread
 					{
 
 					}
-					
-					if(Main.getConfig().getBlockedUsers().contains(el.text()))
+
+					if (Main.getConfig().getBlockedUsers().contains(el.text()))
 					{
 						isBreak = true;
 						break;
@@ -127,8 +127,8 @@ public class ChatListenThread extends Thread
 					sb.append(": ");
 					break;
 				}
-				
-				if(isBreak)
+
+				if (isBreak)
 				{
 					continue;
 				}
